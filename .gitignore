@@ -1,0 +1,11 @@
+tmp
+bin
+build
+gen
+libs/*
+local.properties
+.dl
+*~
+*_app.jar
+progress
+*.log

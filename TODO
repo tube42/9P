@@ -1,0 +1,24 @@
+
+
+TODO
+
+ * move Board to data and its logic to logic
+ * animate the selected tile in ListBaseScene (old code would scale it out slowly while other tiles dissapear)
+
+ * find better levels, right now they are mostly "ssttare..."
+       
+ * fix brick animation so it doesnt suddently change size from big to small and vice versa
+ * when a new word is found play some sound
+ * when user unlocks one star do some animation/sound
+ * check why icons are chopped at top
+
+DONE
+ * implement code to save Level data
+ * implement level selection menu
+ * why is font distorted when scaled down?
+ * when a new word is found, do some animation/sound/particles
+ * when an old word is revisited, show it somehow
+ * added level groups
+
+ * figure out why the middle bar icon is not shown/animated 
+ * modify Board so World.board.update() is not needed
