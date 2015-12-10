@@ -190,7 +190,11 @@
     <!-- compile and save assets -->
     <exec executable="make" failifexecutionfails="true" />
     <zip destfile="${site}/assets/assets.zip" >
-      <zipfileset dir="assets" prefix="assets"/>
+      <zipfileset dir="assets" prefix="assets">
+        <exclude name="dict/*" />
+        <exclude name="progress/" />
+        <exclude name="*.zip" />
+      </zipfileset>
       <zipfileset dir="res" prefix="res" />
     </zip>
 
