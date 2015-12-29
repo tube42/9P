@@ -52,7 +52,6 @@ public class LevelItem extends ListBaseItem
         
         final float x = getX();
         final float y = getY();
-        // final float a = Math.max(0, 1 - (1 - getAlpha() ) * 5f); // fade quicker
         final float a = getAlpha();
         
         // stars

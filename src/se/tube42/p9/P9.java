@@ -30,7 +30,7 @@ public class P9 extends BaseApp
         onResize(World.sw, World.sh);
         
         ServiceProvider.init();
-        
+        IOService.loadSettings();
         load_assets();
         
         // another one to update the compo right away
@@ -47,6 +47,8 @@ public class P9 extends BaseApp
         
         // first screen
         World.scene_menu = new MenuScene();
+        World.scene_settings = new SettingsScene();
+        World.scene_about = new AboutScene();
         World.scene_game = new GameScene();
         World.scene_stats = new StatsScene();
         World.scene_group = new GroupScene();

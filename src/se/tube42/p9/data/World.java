@@ -34,6 +34,8 @@ public final class World extends UIC
     
     // scenes
     public static MenuScene scene_menu;
+    public static SettingsScene scene_settings;
+    public static AboutScene scene_about;
     public static LevelScene scene_level;
     public static GroupScene scene_group;
     public static StatsScene scene_stats;

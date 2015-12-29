@@ -155,7 +155,7 @@
       <classpath refid="cp" />
     </java>
 
-    <delete dir="assets/progress" />
+    <delete dir="assets/save" />
   </target>
 
   <!-- create jar for the desktop -->

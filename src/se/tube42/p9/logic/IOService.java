@@ -10,14 +10,15 @@ import com.badlogic.gdx.files.*;
 import se.tube42.p9.data.*;
 import static se.tube42.p9.data.Constants.*;
 
-/* package */ final class IOService
+public final class IOService
 {
+    private static final String BASE = "save";
     
     // -----------------------------------------------------------------
     // wordlist
     // -----------------------------------------------------------------
     
-    public static WordList loadWordList(String name)
+    /* package */ static WordList loadWordList(String name)
           throws IOException
     {
     	final String filename = "dict/" + name + ".bin";
@@ -41,10 +42,10 @@ import static se.tube42.p9.data.Constants.*;
     // levels (all of them)
     // -----------------------------------------------------------------
     
-    public static Level [] loadLevels(WordList wl)
+    /* package */ static Level [] loadLevels(WordList wl)
           throws IOException
     {
-    	final String filename = "levels/level." + wl.getName() + ".txt";
+        final String filename = "levels/level." + wl.getName() + ".txt";
         Reader r0 = Gdx.files.internal(filename).reader();
         BufferedReader r = new BufferedReader(r0);
         ArrayList<String> list = new ArrayList<String>();
@@ -74,7 +75,7 @@ import static se.tube42.p9.data.Constants.*;
     // level ( a single one)
     // -----------------------------------------------------------------
     
-    public static Level loadLevel(int id, String data)
+    /* package */ static Level loadLevel(int id, String data)
     {
         final Level ret = new Level(id);
         final String [] ls = data.split(" ");
@@ -87,10 +88,10 @@ import static se.tube42.p9.data.Constants.*;
         return ret;
     }
     
-    public static void loadLevelProgress(WordList wl, Level l)
+    /* package */ static void loadLevelProgress(WordList wl, Level l)
           throws IOException
     {
-    	final String filename = "progress/levelprog_" + wl.getName() + "_" + l.board;
+        final String filename = BASE + "/levelprog_" + wl.getName() + "_" + l.board;
     	FileHandle file = Gdx.files.local(filename);
     	if(file != null && file.exists()) {
             l.setProgress( file.readString() );
@@ -98,10 +99,10 @@ import static se.tube42.p9.data.Constants.*;
     	}
     }
     
-    public static void saveLevelProgress(WordList wl, Level l)
+    /* package */ static void saveLevelProgress(WordList wl, Level l)
           throws IOException
     {
-    	final String filename = "progress/levelprog_" + wl.getName() + "_" + l.board;
+        final String filename = BASE + "/levelprog_" + wl.getName() + "_" + l.board;
         FileHandle file = Gdx.files.local(filename);
         if(file == null) {
             System.err.println("ERROR: could not write to " + filename);
@@ -110,6 +111,36 @@ import static se.tube42.p9.data.Constants.*;
         file.writeString( l.getProgress(), false);
     }
     
+    // --------------------------------------------------------------
+    
+    public static void saveSettings()
+    {
+        try {
+            Writer wr = Gdx.files.local( BASE + "/settings.txt").writer(false);
+            wr.write(Settings.sound_on ? "sound_on" : "sound_off");
+            wr.close();
+        } catch(Exception e) {
+            System.err.println("ERROR: " + e);
+        }
+    }
+    
+    public static void loadSettings()
+    {
+        try {
+            Reader rd = Gdx.files.local(BASE + "/settings.txt").reader();
+            BufferedReader r = new BufferedReader(rd);
+            for(;;) {
+                String line = r.readLine();
+                if(line == null) break;
+                if("sound_on".equals(line)) Settings.sound_on = true;
+                else if("sound_off".equals(line)) Settings.sound_on = false;
+                else System.err.println("Unknown setting: " + line);
+            }
+            rd.close();
+        } catch(Exception e) {
+            System.err.println("ERROR: " + e);
+        }
+    }
     
     // --------------------------------------------------------------
     // helper functions

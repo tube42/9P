@@ -11,6 +11,6 @@ public class DesktopMain
     public static void main(String[] args )
     {
         P9 app = new P9();
-        new LwjglApplication( app, "P9", 320, 480);
+        new LwjglApplication( app, "9P", 480, 720);
     }
 }

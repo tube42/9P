@@ -27,11 +27,15 @@ public class ButtonItem extends SpriteItem
         super(Assets.tex_rect, 0);
         
         this.font = Assets.fonts2[0];
-        this.text = text;
         this.flags |= BaseItem.FLAG_TOUCHABLE;
         setColor(Constants.COLOR_1);
+        setText(text);
     }
     
+    public void setText(String text)
+    {
+        this.text = text;
+    }
     public void press()
     {
         set(BaseItem.ITEM_S, 1.1f).configure(0.1f, null)

@@ -19,7 +19,7 @@ public final class Constants
     public static final String
           CHARSET_ALPHA = "abcdefghijklmnopqrstuvwxyz",
           CHARSET_ALNUM = CHARSET_ALPHA + "0123456789",
-          CHARSET_FULL = CHARSET_ALNUM + "%?!.()-";
+          CHARSET_FULL = CHARSET_ALNUM + "%?!.,()-";
     ;
     
     
@@ -42,6 +42,13 @@ public final class Constants
           ICONS_STAR0 = 5,
           ICONS_STAR1 = 6,
           ICONS_LOCK = 7
+          ;
+    
+    public static final String ABOUT_TEXT =
+          "a word puzzle i made since i love word puzzles...\n" +
+          "\n" +
+          "the objective is to find the 9-letter word and unlock more levels. " +
+          "once you have unlocked them all, well congrats, you now know many unusual words..."
           ;
 }
 
