@@ -1,6 +1,9 @@
 The Nine Puzzle (9P)
 ===================
 
+.. image:: https://travis-ci.org/tube42/9P.svg
+    :target: https://travis-ci.org/tube42/9P
+
 This is a FOSS puzzle game for Android. 
 
 .. image:: http://tube42.github.io/9P/img/img00.png
