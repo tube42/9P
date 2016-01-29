@@ -4,7 +4,7 @@
 
 INKSCAPE=inkscape
 
-MARM = java -jar libs/bin/marm_app.jar hiero=libs/bin/hiero
+MARM=libs/pc/marm  hiero=libs/pc/hiero
 
 ##
 

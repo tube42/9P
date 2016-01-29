@@ -6,6 +6,6 @@ libs/*
 local.properties
 .dl
 *~
-*_app.jar
+*.jar
 progress
 *.log

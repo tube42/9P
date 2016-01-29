@@ -177,7 +177,7 @@ public class StatsScene extends Scene
         return false;
     }
     
-    public boolean touch(int x, int y, boolean down, boolean drag)
+    public boolean touch(int ptr, int x, int y, boolean down, boolean drag)
     {
         switch(l0.touch(x, y, down, drag)) {
         case ICONS_BACK:
