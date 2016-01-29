@@ -56,12 +56,10 @@
 
   <!-- download assets and unpack them into the project these are pre-compiled assets.  -->
   <target name="artsdownload" if="artscompile.failed">
-    <!--
-        <echo>USING DOWNLOADED ASSETS!</echo>
-        <get skipexisting="false" src="http://tube42.github.io/${proj}/assets/assets.zip"
-          dest=".dl/assets.zip" />
-        <unzip src=".dl/assets.zip" dest="./"/>
-        -->
+    <echo>USING DOWNLOADED ASSETS!</echo>
+    <get skipexisting="false" src="http://tube42.github.io/${proj}/assets/assets.zip"
+      dest=".dl/assets.zip" />
+    <unzip src=".dl/assets.zip" dest="./"/>
   </target>
 
   <!-- setup project for the first time -->
