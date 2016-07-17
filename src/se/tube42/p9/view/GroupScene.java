@@ -17,48 +17,39 @@ import static se.tube42.p9.data.Constants.*;
 
 public class GroupScene extends ListBaseScene
 {
-    private static final int COUNT = 9;
-    
     public GroupScene()
     {
         super("group");
     }
-    
+
     // ----------------------------------------------------
-    
+
     protected ListBaseItem [] createItems()
     {
         ListBaseItem [] items = new GroupItem[COUNT];
         for(int i = 0; i < COUNT; i++) {
             items[i] = new GroupItem(i);
         }
-        
+
         return items;
     }
-    
+
     protected void updateItems()
     {
         boolean enabled = true;
     	for(int i = 0; i < items.length; i++) {
             GroupItem gi = (GroupItem) items[i];
             gi.setEnabled(enabled);
-            
-            // see how many in this group are enabled
+
+            // all should be solved in order to enable the next group
             if(enabled) {
-                int cnt = 0;
-                final int offset = i * COUNT;
-                for(int j = 0; j < COUNT; j++) {
-                    final Level l = World.levels[offset + j];
-                    if(l != null && l.calcStars() > 0)
-                        cnt ++;               
-                }
-                
-                // next group is enabled?
-                enabled = cnt >= (COUNT * 3 / 4);
-            }
+		int prog = GameService.getGroupProgress(i * COUNT);
+		if(prog != GameService.PROGRESS_ALL)
+		    enabled = false;
+	    }
         }
-    }  
-    
+    }
+
     protected void goForward(ListBaseItem b)
     {
         GroupItem l = (GroupItem) b;
@@ -67,11 +58,11 @@ public class GroupScene extends ListBaseScene
             World.mgr.setScene(World.scene_level, 1000);
         }
     }
-    
+
     protected void goBack()
     {
         World.mgr.setScene(World.scene_menu);
     }
-    
-    
+
+
 }

@@ -20,18 +20,30 @@ public class ListBaseItem extends SpriteItem
 {
     protected BitmapFont font;
     protected String text;
-    
+    protected boolean enabled;
+
     public ListBaseItem()
     {
         super(Assets.tex_rect, 0);
         this.font = Assets.fonts2[0];
         this.flags |= BaseItem.FLAG_TOUCHABLE;
+	this.enabled = true;
         setColor(Constants.COLOR_1);
-    }  
-    
+    }
+
     public void press()
     {
         set(ITEM_S, 1, 1.1f).configure(0.1f, null)
               .tail(1).configure(0.2f, null);
-    }    
+    }
+
+    public boolean isEnabled()
+    {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled)
+    {
+        this.enabled = enabled;
+    }
 }
