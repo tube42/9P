@@ -20,74 +20,80 @@ public class MenuScene extends Scene
 {
     private Layer l0;
     private ButtonItem [] buttons;
-    
+
     public MenuScene()
     {
         super("menu");
-        
+
         buttons = new ButtonItem[3];
-        buttons[0] = new ButtonItem("about");
-        buttons[1] = new ButtonItem("settings");
-        buttons[2] = new ButtonItem("play");
-        
+        buttons[0] = new ButtonItem("about", Assets.tex_icons, ICONS_ABOUT);
+        buttons[1] = new ButtonItem("settings", Assets.tex_icons, ICONS_SETTINGS);
+        buttons[2] = new ButtonItem("play", Assets.tex_icons, ICONS_PLAY);
+	for(int i = 0; i < buttons.length; i++)
+	    buttons[i].setTextPosition(ButtonItem.TEXTPOS_BELOW);
+
         l0 = getLayer(0);
         l0.add(buttons);
         l0.flags |= Layer.FLAG_TOUCHABLE;
     }
-    
+
     // --------------------------------------------------
-    
+
     private void position()
     {
-        
-        final int but_w = 4 * World.tile3_size;
-        final int but_h = World.tile3_size;
-        final int but_gap = World.tile3_size / 2;
-        final int but_x0 = (World.sw - but_w) / 2;
-        final int but_y0 = (World.sh - 3 * but_h - 2 * but_gap)/ 2;
-        
-        for(int i = 0; i < buttons.length; i++) {
-            final BaseItem bi = buttons[i];
-            final float t = RandomService.get(0.2f, 0.3f);
-            bi.setSize(but_w, but_h);
-            bi.setPosition(t, bi.x2 = but_x0,
-                      bi.y2 = but_y0 + i * (but_gap + but_h));
-        }
+	final int s0 = (~15) & World.tile3_size; // 6 * 9
+	final int x0 = (World.sw - s0 * 6) / 2;
+	final int y0 = (World.sh - s0 * 9) / 2;
+
+	// play
+	final ButtonItem p = buttons[2];
+	p.setSize(s0 * 2, s0 * 2);
+	p.setPosition(p.x2 = x0 + s0 * 2, p.y2 = y0 + s0 * 5);
+
+	// about
+	final ButtonItem a = buttons[0];
+	a.setSize(s0, s0);
+	a.setPosition(a.x2 = x0 + s0 * 1, a.y2 = y0 + s0 * 1);
+
+	// settings
+	final ButtonItem s = buttons[1];
+	s.setSize(s0, s0);
+	s.setPosition(s.x2 = x0 + s0 * 4, s.y2 = y0 + s0 * 1);
     }
-    
+
     private void animate(boolean in_)
     {
         for(int i = 0; i < buttons.length; i++) {
             final BaseItem bi = buttons[i];
             final float t = 0.3f + i * 0.1f;
-            
+
             bi.set(BaseItem.ITEM_A, in_, 0, 1, t, null);
             bi.set(BaseItem.ITEM_Y, in_, bi.y2 - World.sh, bi.y2, t, TweenEquation.QUAD_OUT);
-        }   
+        }
     }
-    
+
     public void resize(int w, int h)
     {
         super.resize(w, h);
         position();
-    }            
-    
-    
+    }
+
+
     public void onShow()
     {
         position();
         animate(true);
-        
+
     }
-    
+
     public void onHide()
     {
         position();
         animate(false);
     }
-    
+
     // ----------------------------------------------------
-    
+
     private void handle_button(BaseItem bi)
     {
         if(buttons[2] == bi) {
@@ -99,19 +105,19 @@ public class MenuScene extends Scene
         }
     }
     // ----------------------------------------------------
-    
+
     public boolean type(int key, boolean down)
     {
         if(down && (key == Keys.BACK || key == Keys.ESCAPE)) {
             Gdx.app.exit();
         }
-        
+
         return false;
     }
-    
+
     public boolean touch(int ptr, int x, int y, boolean down, boolean drag)
     {
-        
+
         if(down && !drag) {
             ButtonItem hit = (ButtonItem) l0.hit(x, y);
             if(hit != null) {
@@ -121,5 +127,5 @@ public class MenuScene extends Scene
         }
         return true;
     }
-    
+
 }

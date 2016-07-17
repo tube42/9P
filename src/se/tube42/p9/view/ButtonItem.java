@@ -18,20 +18,36 @@ import static se.tube42.p9.data.Constants.*;
 
 public class ButtonItem extends SpriteItem
 {
+    public static final int
+	TEXTPOS_CENTER = 0,
+	TEXTPOS_BELOW = 1
+	;
+
     private BitmapFont font;
     private String text;
-    
-    
+    private int textpos;
+
     public ButtonItem(String text)
     {
-        super(Assets.tex_rect, 0);
-        
+	this(text, Assets.tex_rect, 0);
+    }
+
+    public ButtonItem(String text, TextureRegion [] tex, int index)
+    {
+        super(tex, index);
+
         this.font = Assets.fonts2[0];
         this.flags |= BaseItem.FLAG_TOUCHABLE;
+	this.textpos = TEXTPOS_CENTER;
         setColor(Constants.COLOR_1);
         setText(text);
     }
-    
+
+    public void setTextPosition(int textpos)
+    {
+	this.textpos = textpos;
+    }
+
     public void setText(String text)
     {
         this.text = text;
@@ -44,13 +60,18 @@ public class ButtonItem extends SpriteItem
     public void draw(SpriteBatch sb)
     {
         super.draw(sb);
-        
-        BitmapFont.TextBounds tb = font.getBounds(text);
+
+        final BitmapFont.TextBounds tb = font.getBounds(text);
+	final int x = (int)(getX() + (w - tb.width) / 2);
+	int y = (int) getY();
+
+	if(textpos == TEXTPOS_CENTER)
+	    y += (h + tb.height) / 2;
+	else if(textpos == TEXTPOS_BELOW)
+	    y -= tb.height / 4;
+
         ColorHelper.set(font, COLOR_FG, getAlpha() );
-        font.draw(sb, text,
-                  getX() + (w - tb.width) / 2,
-                  getY() + (h + tb.height) / 2
-                  );
-        
+        font.draw(sb, text, x, y);
+
     }
 }
