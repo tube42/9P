@@ -28,7 +28,8 @@ public class GroupScene extends ListBaseScene
     {
         ListBaseItem [] items = new GroupItem[COUNT];
         for(int i = 0; i < COUNT; i++) {
-            items[i] = new GroupItem(i);
+            final String label = String.format("%d-%d", i * 9 + 1, i * 9 + 9);
+            items[i] = new GroupItem(i, label);
         }
 
         return items;

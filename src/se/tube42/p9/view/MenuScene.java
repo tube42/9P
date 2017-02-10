@@ -16,25 +16,39 @@ import se.tube42.p9.logic.*;
 
 import static se.tube42.p9.data.Constants.*;
 
-public class MenuScene extends Scene
+public class MenuScene extends Scene implements TweenListener
 {
-    private Layer l0;
+    private Layer l0, l1;
     private ButtonItem [] buttons;
+    private BaseText [] words;
 
     public MenuScene()
     {
         super("menu");
 
+        l0 = getLayer(0);
+        l1 = getLayer(1);
+        l1.flags |= Layer.FLAG_TOUCHABLE;
+
         buttons = new ButtonItem[3];
         buttons[0] = new ButtonItem("about", Assets.tex_icons, ICONS_ABOUT);
         buttons[1] = new ButtonItem("settings", Assets.tex_icons, ICONS_SETTINGS);
         buttons[2] = new ButtonItem("play", Assets.tex_icons, ICONS_PLAY);
-	for(int i = 0; i < buttons.length; i++)
-	    buttons[i].setTextPosition(ButtonItem.TEXTPOS_BELOW);
+		for(int i = 0; i < buttons.length; i++) {
+			buttons[i].setColor(Constants.COLOR_FG);
+			buttons[i].setTextPosition(ButtonItem.TEXTPOS_BELOW);
+		}
+        l1.add(buttons);
 
-        l0 = getLayer(0);
-        l0.add(buttons);
-        l0.flags |= Layer.FLAG_TOUCHABLE;
+
+        words = new BaseText[8];
+        for(int i = 0; i < words.length; i++) {
+            words[i] = new BaseText(Assets.fonts2[0]);
+            words[i].setColor(Constants.COLOR_1);
+            words[i].setAlignment(-0.5f, 0.5f);
+        }
+
+        l0.add(words);
     }
 
     // --------------------------------------------------
@@ -70,12 +84,37 @@ public class MenuScene extends Scene
             bi.set(BaseItem.ITEM_A, in_, 0, 1, t, null);
             bi.set(BaseItem.ITEM_Y, in_, bi.y2 - World.sh, bi.y2, t, TweenEquation.QUAD_OUT);
         }
+
+
+        if(in_) {
+            for(int i = 0; i < words.length; i++) {
+                final float t = RandomService.get(0.5f, 2.0f);
+                words[i].setText("");
+                words[i].set(BaseItem.ITEM_A, 0, 0.1f)
+                    .configure(t, null)
+                    .finish(this, i);
+            }
+        } else {
+            for(int i = 0; i < words.length; i++) {
+                words[i].set(BaseItem.ITEM_A, 0)
+                    .configure(0.1f + 0.1f * i, null);
+
+            }
+        }
+
     }
 
     public void resize(int w, int h)
     {
         super.resize(w, h);
         position();
+
+        final int h0 = h / 16;;
+        final int h1 = ( h - h0 * 2) / (words.length - 1);
+        for(int i = 0; i < words.length; i++) {
+            words[i].setPosition(w / 2, h0 + h1 * i);
+        }
+
     }
 
 
@@ -90,6 +129,30 @@ public class MenuScene extends Scene
     {
         position();
         animate(false);
+    }
+
+
+    public void onFinish(Item item, int index, int msg)
+    {
+        final float t0 = RandomService.get(0.5f, 0.7f);
+        final float t1 = RandomService.get(6.0f, 12.0f);
+        final float t2 = RandomService.get(0.5f, 0.7f);
+
+        final float x0 = UIC.sw * RandomService.get(0.2f, 0.8f);
+        final float x1 = UIC.sw * RandomService.get(0.2f, 0.8f);
+        final float x2 = UIC.sw * RandomService.get(0.2f, 0.8f);
+
+        final int i = msg;
+
+        words[i].setText(World.words.random());
+        words[i].set(BaseItem.ITEM_X, x0, x1).configure(t0, null)
+            .pause(t1)
+            .tail(x2);
+
+        words[i].set(BaseItem.ITEM_A, 0, 1.0f).configure(t0, null)
+            .pause(t1)
+            .tail(0).finish(this, i);
+
     }
 
     // ----------------------------------------------------
@@ -119,7 +182,7 @@ public class MenuScene extends Scene
     {
 
         if(down && !drag) {
-            ButtonItem hit = (ButtonItem) l0.hit(x, y);
+            ButtonItem hit = (ButtonItem) l1.hit(x, y);
             if(hit != null) {
                 hit.press();
                 handle_button(hit);

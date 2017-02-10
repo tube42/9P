@@ -20,10 +20,10 @@ public class GroupItem extends ListBaseItem
 {
     private int group;
 
-    public GroupItem(int group)
+    public GroupItem(int group, String label)
     {
         this.group = group;
-        this.text = "" + (char)('a' + group);
+        this.text = label;
     }
 
     public int getGroup()
