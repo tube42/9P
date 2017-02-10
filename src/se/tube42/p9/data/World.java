@@ -22,17 +22,18 @@ public final class World extends UIC
     public static int tile1_size;
     public static int tile2_size;
     public static int tile3_size;
-    
+
     // game data
     public static WordList words;
-    
+
     public static int level_group;
     public static Level []levels;
     public static Level level_curr;
-    
+
     public static Board board;
-    
+
     // scenes
+    public static BackgroundScene scene_bg;
     public static MenuScene scene_menu;
     public static SettingsScene scene_settings;
     public static AboutScene scene_about;
@@ -40,10 +41,9 @@ public final class World extends UIC
     public static GroupScene scene_group;
     public static StatsScene scene_stats;
     public static GameScene scene_game;
-    
+
     // app stuff
     public static SceneManager mgr;
     public static Item bgc; // background color
-    
-}
 
+}

@@ -45,7 +45,8 @@ public class P9 extends BaseApp
 
         ColorHelper.set(bgc, COLOR_BG, 0.7f);
 
-        // first screen
+
+        World.scene_bg = new BackgroundScene();
         World.scene_menu = new MenuScene();
         World.scene_settings = new SettingsScene();
         World.scene_about = new AboutScene();
@@ -53,7 +54,8 @@ public class P9 extends BaseApp
         World.scene_stats = new StatsScene();
         World.scene_group = new GroupScene();
         World.scene_level = new LevelScene();
-        World.mgr.setScene( World.scene_menu);
+        World.mgr.setScene( World.scene_menu);  // first screen
+        World.mgr.setBackground( World.scene_bg);
 
         // TEMP until we fix the code handling back:
         Gdx.input.setCatchBackKey(false);
