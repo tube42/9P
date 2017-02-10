@@ -51,7 +51,7 @@ public class BackgroundScene extends Scene implements TweenListener
     public void onShow()
     {
         for(int i = 0; i < words.length; i++) {
-            final float t = 0.3f * i+ RandomService.get(2.5f, 4.0f);
+            final float t = 0.6f * i+ RandomService.get(2.5f, 4.0f);
             words[i].setText("");
             words[i].set(BaseItem.ITEM_A, 0, 0.1f)
                 .configure(t, null)
