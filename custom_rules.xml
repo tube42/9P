@@ -3,6 +3,9 @@
   <property name="apkplz" value="${proj}-release.apk" />
   <property name="site" location="../tube42.github.io/${proj}" />
 
+  <!-- JDK 8 -->
+  <property name="ant.build.javac.source" value="1.7" />
+  <property name="ant.build.javac.target" value="1.7" />
 
   <!-- get base42 in place-->
   <target name="downloaddeps">
@@ -58,7 +61,7 @@
   <target name="artsdownload" if="artscompile.failed">
     <echo>USING DOWNLOADED ASSETS!</echo>
     <mkdir dir=".dl" />
-    
+
     <get skipexisting="false" src="http://tube42.github.io/${proj}/assets/assets.zip"
       dest=".dl/assets.zip" />
     <unzip src=".dl/assets.zip" dest="./"/>
@@ -158,5 +161,10 @@
     <delete dir="build"/>
     <delete dir="libs"/>
     <delete dir="bin"/>
+
+    <exec executable="git" failifexecutionfails="false">
+      <arg line="submodule foreach ant clean"/>
+    </exec>
+
   </target>
 </project>
