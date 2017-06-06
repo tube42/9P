@@ -23,7 +23,7 @@ public class GroupItem extends ListBaseItem
     public GroupItem(int group, String label)
     {
         this.group = group;
-        this.text = label;
+        this.text.setText(label);
     }
 
     public int getGroup()
@@ -43,14 +43,12 @@ public class GroupItem extends ListBaseItem
 
         if(enabled) {
             // level number
-            final BitmapFont.TextBounds tb = font.getBounds(text);
-            final float w0 = tb.width;
-            final float h0 = tb.height;
-            ColorHelper.set(font, COLOR_FG, a);
-            font.draw(sb, text,
-                      getX() + (w - w0) / 2,
-                      getY() + (h + h0) / 2
-                      );
+	    final BitmapFont font = text.getFont();
+	    ColorHelper.set(font, COLOR_FG, a);
+	    font.draw(sb, text.getText(),
+		      getX() + (w - text.getWidth()) / 2,
+		      getY() + (h + text.getHeight()) / 2
+		      );
         } else {
             final float h2 = h / 2;
             final float w2 = w / 2;

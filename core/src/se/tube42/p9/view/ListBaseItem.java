@@ -18,16 +18,17 @@ import static se.tube42.p9.data.Constants.*;
 
 public class ListBaseItem extends SpriteItem
 {
-    protected BitmapFont font;
-    protected String text;
+    protected Text text;
     protected boolean enabled;
 
     public ListBaseItem()
     {
         super(Assets.tex_rect, 0);
-        this.font = Assets.fonts2[0];
+        this.text = new Text();
+        this.text.setFont( Assets.fonts2[0] );
+
         this.flags |= BaseItem.FLAG_TOUCHABLE;
-	this.enabled = true;
+        this.enabled = true;
         setColor(Constants.COLOR_1);
     }
 

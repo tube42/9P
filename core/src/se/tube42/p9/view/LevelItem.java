@@ -36,11 +36,11 @@ public class LevelItem extends ListBaseItem
         this.level = l;
         if(l == null) {
             this.flags &= ~BaseItem.FLAG_VISIBLE;
-            this.text = "";
+            this.text.setText("");
             this.stars = 0;
         } else {
             this.flags |= BaseItem.FLAG_VISIBLE;
-            this.text = "" + (1 + l.id);
+            this.text.setText( "" + (1 + l.id) );
             this.stars = GameService.calcLevelStars(l);
         }
     }
@@ -68,13 +68,11 @@ public class LevelItem extends ListBaseItem
 
 
 	    // level number
-	    final BitmapFont.TextBounds tb = font.getBounds(text);
-	    final float w0 = tb.width;
-	    final float h0 = tb.height;
+	    final BitmapFont font = text.getFont();
 	    ColorHelper.set(font, COLOR_FG, a);
-	    font.draw(sb, text,
-		      getX() + (w - w0) / 2,
-		      getY() + (h + h0) / 2
+	    font.draw(sb, text.getText(),
+		      getX() + (w - text.getWidth()) / 2,
+		      getY() + (h + text.getHeight()) / 2
 		      );
 	} else {
             final float h2 = h / 2;
