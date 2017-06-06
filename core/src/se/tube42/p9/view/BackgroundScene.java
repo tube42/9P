@@ -109,12 +109,12 @@ public class BackgroundScene extends Scene implements TweenListener
             .pause(t1)
             .tail(x2);
 
-        words[i].set(BaseItem.ITEM_A, 0, 1.0f).configure(t0, null)
+        words[i].set(BaseItem.ITEM_A, 0, 0.5f).configure(t0, null)
             .pause(t1)
             .tail(0).finish(this, i);
 
 
-        rects[i].set(BaseItem.ITEM_A, 0, 0.5f).configure(t0 / 2, null)
+        rects[i].set(BaseItem.ITEM_A, 0, 0.2f).configure(t0 / 2, null)
             .tail(0.0f).configure(t0 / 2, null);
 
 

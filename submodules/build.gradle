@@ -1,0 +1,25 @@
+// this gardle script is just a hack so we can use old projects with minimal work
+
+apply plugin: "java"
+
+sourceCompatibility = 1.6
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "base42/src/", 
+    "base42/submodules/kickstarter/src/se/tube42/lib", 
+    "base42/submodules/tweeny/src/se/tube42/lib" ]
+
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+    }
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+}
