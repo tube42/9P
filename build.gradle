@@ -11,7 +11,7 @@ buildscript {
 }
 
 allprojects {
-    version = '0.0.2'
+    version = '0.0.3'
     ext {
         appName = "p9"
         gdxVersion = '1.6.1'
@@ -33,7 +33,7 @@ project(":desktop") {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"        
+        compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
     }
 }
 
@@ -64,7 +64,7 @@ project(":submodules") {
 
 
     dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"    
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     }
 }
@@ -73,7 +73,7 @@ project(":core") {
     apply plugin: "java"
 
     dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"        
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile project(":submodules")
     }

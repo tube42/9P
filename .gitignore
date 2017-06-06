@@ -11,4 +11,5 @@ gen/
 .classpath
 .project
 .gradle
+.vscode
 OLD
