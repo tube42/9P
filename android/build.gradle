@@ -18,11 +18,11 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "se.tube42.9p"
+        applicationId "se.tube42.p9"
         minSdkVersion 11
         targetSdkVersion 26
-        versionCode 2
-        versionName "0.0.2"
+        versionCode 3
+        versionName "0.0.3"
     }
     buildTypes {
         release {
@@ -79,7 +79,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'se.tube42.9p/se.tube42.9p.MainActivity'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'se.tube42.p9/se.tube42.p9.MainActivity'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.
