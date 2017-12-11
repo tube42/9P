@@ -1,0 +1,12 @@
+language: android
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - android-26
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
