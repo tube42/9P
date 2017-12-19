@@ -21,8 +21,8 @@ android {
         applicationId "se.tube42.p9"
         minSdkVersion 11
         targetSdkVersion 26
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 4
+        versionName "0.0.4"
     }
     buildTypes {
         release {
