@@ -1,23 +1,24 @@
 language: android
-
 android:
   components:
-    - tools # see https://github.com/travis-ci/travis-ci/issues/6040#issuecomment-219367943)
-    - platform-tools
-    - build-tools-26.0.1
+    - build-tools-26.0.2
     - android-26
-licenses:
+    - tools
+    - platform-tools
+  licenses:
     - 'android-sdk-license-.+'
-    - '.+'
 
 
 script:
-  - ./gradlew build
+    - ./gradlew check
+    - ./gradlew desktop:build
+    - ./gradlew android:build
 
-before_install:
-  - chmod +x gradlew
+cache:
+  directories:
+    - $HOME/.android
 
-notifications:
-  email:
-    on_success: never
-    on_failure: always
+branches:
+  only:
+    - master
+    - /^rel-.*$/
