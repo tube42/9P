@@ -18,7 +18,7 @@ import static se.tube42.p9.data.Constants.*;
 
 public class BackgroundScene extends Scene implements TweenListener
 {
-    private static final int COUNT = 8;
+    private static final int COUNT = 6;
 
     private BaseText [] words;
     private SpriteItem [] rects;
@@ -102,11 +102,11 @@ public class BackgroundScene extends Scene implements TweenListener
             .pause(t1)
             .tail(x2);
 
-        words[i].set(BaseItem.ITEM_A, 0, 1.0f).configure(t0, null)
+        words[i].set(BaseItem.ITEM_A, 0, 0.25f).configure(t0, null)
             .pause(t1)
             .tail(0).finish(this, i);
 
-        rects[i].set(BaseItem.ITEM_A, 0, 0.5f).configure(t0 / 2, null)
+        rects[i].set(BaseItem.ITEM_A, 0, 0.15f).configure(t0 / 2, null)
             .tail(0.0f).configure(t0 * 2, null);
     }
 

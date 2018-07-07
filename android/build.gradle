@@ -1,5 +1,5 @@
 android {
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     compileSdkVersion 26
     sourceSets {
         main {
@@ -21,8 +21,8 @@ android {
         applicationId "se.tube42.p9"
         minSdkVersion 11
         targetSdkVersion 26
-        versionCode 4
-        versionName "0.0.4"
+        versionCode 5
+        versionName "0.0.5"
     }
     buildTypes {
         release {
