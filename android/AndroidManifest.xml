@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:largeHeap="true"
         android:icon="@drawable/ic_launcher"
-        android:label="The Tower"
+        android:label="9P"
         android:theme="@style/GdxTheme" >
 
     <activity android:name="MainActivity"
