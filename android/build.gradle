@@ -18,11 +18,11 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "se.tube42.p9"
+        applicationId "se.tube42.p9.android"
         minSdkVersion 11
         targetSdkVersion 26
-        versionCode 6
-        versionName "0.0.6"
+        versionCode 7
+        versionName "0.0.7"
     }
     buildTypes {
         release {
