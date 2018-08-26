@@ -6,7 +6,7 @@ The Nine Puzzle (9P)
 
 This is a FOSS puzzle game for Android.
 
-.. image:: extra/screenshots/img00.png
+.. image:: extra/doc/gameplay.gif
 
 
 Assets

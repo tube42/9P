@@ -9,6 +9,6 @@ public class DesktopLauncher
     public static void main(String[] args )
     {
         P9 app = new P9();
-        new LwjglApplication( app, "9P", 480, 720);
+        new LwjglApplication( app, "9P", 480, 854);
     }
 }
