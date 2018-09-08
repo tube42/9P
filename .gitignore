@@ -10,5 +10,3 @@ build
 .settings
 .project
 .classpath
-
-**/libs/*.so
