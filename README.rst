@@ -1,8 +1,15 @@
 The Nine Puzzle (9P)
 ===================
 
+
 .. image:: https://travis-ci.org/tube42/9P.svg
     :target: https://travis-ci.org/tube42/9P
+
+
+.. raw:: html
+   
+   <a href="https://f-droid.org/app/se.tube42.p9.android"><img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="100"></a>
+
 
 This is a FOSS puzzle game for Android.
 
@@ -25,7 +32,7 @@ That is,
 
 .. code:: shell
 
-    sudo apt-get install imagemagick inkscape
+    sudo apt install imagemagick inkscape
 
 
 To build the assets, you should do
@@ -34,4 +41,12 @@ To build the assets, you should do
 
     make setup
     make
+
+Valid words
+----------
+
+The word-list this game uses is `open source <https://gitlab.com/tube42/wordlists>`_.
+File an issue with them if you want to remove or add some words or improve something else.
+
+If you instead have an issue with how 9P works with words, open an issue in the 9P repository.
 
