@@ -22,7 +22,8 @@ public class SettingsScene extends Scene
     private Layer l1;
     private ButtonItem [] settings;
 
-    private boolean funoff = true; // ;)
+	private boolean funoff = true; // ;)
+	private int delstate = 0;
 
     public SettingsScene()
     {
@@ -33,9 +34,10 @@ public class SettingsScene extends Scene
         l0.setIcon(0, ICONS_BACK);
 
 
-        settings = new ButtonItem[2];
+        settings = new ButtonItem[3];
         settings[0] = new ButtonItem("");
-        settings[1] = new ButtonItem("");
+		settings[1] = new ButtonItem("");
+		settings[2] = new ButtonItem("");
 
         l1 = getLayer(1);
         l1.add(settings);
@@ -77,7 +79,9 @@ public class SettingsScene extends Scene
     private void update()
     {
         settings[0].setText( Settings.sound_on ? "sound on" : "sound off");
-        settings[1].setText( funoff ? "fun off" : "boring on");
+		settings[1].setText( funoff ? "fun off" : "boring on");
+		settings[2].setText( delstate == 0 ? "delete progress" :
+			delstate == 1 ? "confirm" : "deleted");
     }
 
     public void resize(int w, int h)
@@ -91,6 +95,7 @@ public class SettingsScene extends Scene
 
     public void onShow()
     {
+		delstate = 0;
         update();
         position();
         animate(true);
@@ -113,7 +118,15 @@ public class SettingsScene extends Scene
         } else if(bi == settings[1]) {
             funoff = !funoff;
             update();
-        }
+        } else if(bi == settings[2]) {
+			if(delstate == 1) {
+				ServiceProvider.deleteSavedLevels();
+			}
+			if(delstate < 2) {
+				delstate++;
+				update();
+			}
+		}
     }
 
     private void go_back()

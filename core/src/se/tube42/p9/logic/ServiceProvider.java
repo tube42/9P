@@ -14,29 +14,34 @@ import se.tube42.lib.service.*;
 
 public final class ServiceProvider
 {
-    
+
     public static void init()
     {
         StorageService.init("9P-0");
     }
-    
+
     public static void service(long dt)
     {
         JobService.service(dt);
         TweenManager.service( dt);
     }
-    
+
     public static void finish()
     {
         StorageService.flush();
     }
-    
+
     public static void saveAll()
     {
     	GameService.saveChangedLevels();
     	StorageService.flush();
-    }
-    
+	}
+
+	public static void deleteSavedLevels() {
+		GameService.deleteSavedLevels();
+		StorageService.flush();
+	}
+
     // ------------------------------------------------
     // IOService
     public static InputStream readFile(String name)

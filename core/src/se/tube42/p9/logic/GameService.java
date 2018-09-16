@@ -62,6 +62,18 @@ public final class GameService
         } catch(Exception exx) {
             System.err.println("Could not save levels...");
         }
+	}
+
+	public static synchronized void deleteSavedLevels()
+    {
+		for(int i = 0; i < World.levels.length; i++) {
+			World.levels[i].reset();
+    		try {
+				IOService.deleteProgress(World.words, World.levels[i]);
+			} catch(Exception exx) {
+				// ignored
+            }
+        }
     }
 
     public static final int

@@ -13,11 +13,11 @@ import static se.tube42.p9.data.Constants.*;
 public final class IOService
 {
     private static final String BASE = "save";
-    
+
     // -----------------------------------------------------------------
     // wordlist
     // -----------------------------------------------------------------
-    
+
     /* package */ static WordList loadWordList(String name)
           throws IOException
     {
@@ -25,7 +25,7 @@ public final class IOService
         InputStream is = Gdx.files.internal(filename).read();
         int size = read_int32(is) - 4;
         final byte [] data = new byte[size];
-        
+
         int got = 0;
         while(size > 0) {
             int n = is.read(data, got, size);
@@ -34,14 +34,14 @@ public final class IOService
             got += n;
             size -= n;
         }
-        
+
         return new WordList(name, data);
     }
-    
+
     // -----------------------------------------------------------------
     // levels (all of them)
     // -----------------------------------------------------------------
-    
+
     /* package */ static Level [] loadLevels(WordList wl)
           throws IOException
     {
@@ -49,17 +49,17 @@ public final class IOService
         Reader r0 = Gdx.files.internal(filename).reader();
         BufferedReader r = new BufferedReader(r0);
         ArrayList<String> list = new ArrayList<String>();
-        
+
         for(;;) {
             String line = r.readLine();
             if(line == null) break;
             if(line.length() > 10)
                 list.add(line);
         }
-        
+
         r.close();
         r0.close();
-        
+
         // parse those strings into a level
         final int cnt = list.size();
         Level []ret = new Level[cnt];
@@ -69,40 +69,44 @@ public final class IOService
         }
         return ret;
     }
-    
-    
+
+
     // -----------------------------------------------------------------
     // level ( a single one)
     // -----------------------------------------------------------------
-    
+
     /* package */ static Level loadLevel(int id, String data)
     {
         final Level ret = new Level(id);
         final String [] ls = data.split(" ");
         ret.board = ls[0];
-        
+
         for(int i = 1; i < ls.length; i++)
             ret.solutions[i - 1 + 4] = Integer.parseInt(ls[i]);
-        
+
         ret.reset();
         return ret;
     }
-    
+
+	private static String getSaveFile(WordList wl, Level l)
+	{
+		return BASE + "/levelprog_" + wl.getName() + "_" + l.board;
+	}
     /* package */ static void loadLevelProgress(WordList wl, Level l)
           throws IOException
     {
-        final String filename = BASE + "/levelprog_" + wl.getName() + "_" + l.board;
+        final String filename = getSaveFile(wl, l);
     	FileHandle file = Gdx.files.local(filename);
     	if(file != null && file.exists()) {
             l.setProgress( file.readString() );
             // file.close();
     	}
     }
-    
+
     /* package */ static void saveLevelProgress(WordList wl, Level l)
           throws IOException
     {
-        final String filename = BASE + "/levelprog_" + wl.getName() + "_" + l.board;
+        final String filename = getSaveFile(wl, l);
         FileHandle file = Gdx.files.local(filename);
         if(file == null) {
             System.err.println("ERROR: could not write to " + filename);
@@ -110,9 +114,18 @@ public final class IOService
         }
         file.writeString( l.getProgress(), false);
     }
-    
+
+   /* package */ static void deleteProgress(WordList wl, Level l)
+		throws IOException
+   {
+		final String filename = getSaveFile(wl, l);
+		FileHandle file = Gdx.files.local(filename);
+		if(file != null)
+		   file.delete();
+   }
+
     // --------------------------------------------------------------
-    
+
     public static void saveSettings()
     {
         try {
@@ -123,7 +136,7 @@ public final class IOService
             System.err.println("ERROR: " + e);
         }
     }
-    
+
     public static void loadSettings()
     {
         try {
@@ -141,10 +154,10 @@ public final class IOService
             System.err.println("ERROR: " + e);
         }
     }
-    
+
     // --------------------------------------------------------------
     // helper functions
-    
+
     private static final int read_int32(InputStream is)
           throws IOException
     {
@@ -153,8 +166,8 @@ public final class IOService
             int c = is.read() & 0xFF;
             ret = (ret << 8) | c;
     	}
-        
+
     	return ret;
     }
-    
+
 }
