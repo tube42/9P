@@ -21,8 +21,10 @@ android {
         applicationId "se.tube42.p9.android"
         minSdkVersion 11
         targetSdkVersion 26
-        versionCode 7
-        versionName "0.0.7"
+
+		// game version (matches git tag)
+        versionCode 8
+        versionName "0.0.8"
     }
     buildTypes {
         release {
