@@ -10,7 +10,8 @@ public final class Assets
 {
     public static BitmapFont [] fonts1;
     public static BitmapFont [] fonts2;
-    
-    public static TextureRegion [] tex_icons, tex_rect;
+
+	public static TextureRegion [] tex_icons, tex_rect;
+	public static TextureRegion [] tex_splash, tex_lang;
 }
 

@@ -36,26 +36,27 @@ public class P9 extends BaseApp
         // another one to update the compo right away
         onResize(World.sw, World.sh);
 
-        // temp debug init:
-        GameService.setDict("en");
+		World.mgr = mgr;
 
+		// background color
+		World.bgc = bgc;
+		World.bgc.set(0, 0);
+		World.bgc.set(1, 0);
+		World.bgc.set(2, 0);
 
-        World.mgr = mgr;
-        World.bgc = bgc;
-
-        ColorHelper.set(bgc, COLOR_BG, 0.7f);
-
-
-        World.scene_bg = new BackgroundScene();
+		World.scene_bg = new BackgroundScene();
         World.scene_menu = new MenuScene();
         World.scene_settings = new SettingsScene();
         World.scene_about = new AboutScene();
         World.scene_game = new GameScene();
         World.scene_stats = new StatsScene();
         World.scene_group = new GroupScene();
-        World.scene_level = new LevelScene();
-        World.mgr.setScene( World.scene_menu);  // first screen
-        World.mgr.setBackground( World.scene_bg);
+		World.scene_level = new LevelScene();
+		// World.mgr.setScene( World.scene_menu);  // first screen
+
+		// first screen
+		World.mgr.setScene( new SplashScene());
+
 
         // TEMP until we fix the code handling back:
         Gdx.input.setCatchBackKey(false);
@@ -79,7 +80,7 @@ public class P9 extends BaseApp
         int ascale = World.ui_scale;
         if(ascale == 3) ascale = 2;
         if(ascale > 4)  ascale = 4;
-        final String aname = "" + ascale;
+        // final String ascale = "" + ascale;
 
         Assets.fonts1 = AssetService.createFonts(
                   "fonts/Roboto-Regular.ttf",
@@ -93,10 +94,17 @@ public class P9 extends BaseApp
                   CHARSET_FULL,
                   World.ui_scale * 30
                   );
-        Texture tmp = AssetService.load(aname + "/icons.png", true);
+        Texture tmp = AssetService.load(ascale + "/icons.png", true);
         Assets.tex_icons = AssetService.divide(tmp, 4, 4);
 
-        tmp = AssetService.load(aname + "/rect.png", true);
-        Assets.tex_rect = new TextureRegion [] { new TextureRegion(tmp) };
+        tmp = AssetService.load(ascale + "/rect.png", true);
+		Assets.tex_rect = new TextureRegion [] { new TextureRegion(tmp) };
+
+		tmp = AssetService.load(ascale + "/splash.png", true);
+		Assets.tex_splash = new TextureRegion [] { new TextureRegion(tmp) };
+
+		tmp = AssetService.load(ascale + "/lang.png", true);
+        Assets.tex_lang = AssetService.divide(tmp, 1, 4);
+
     }
 }

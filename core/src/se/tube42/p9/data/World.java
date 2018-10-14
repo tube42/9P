@@ -17,7 +17,7 @@ import se.tube42.p9.logic.*;
 
 public final class World extends UIC
 {
-    // UI
+	// UI
     public static int ui_scale, ui_gap;
     public static int tile1_size;
     public static int tile2_size;

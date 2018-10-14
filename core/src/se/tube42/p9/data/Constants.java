@@ -3,6 +3,8 @@ package se.tube42.p9.data;
 
 public final class Constants
 {
+	public static final String []LANGUAGES =  {"en", "fr"};
+
     public static final int
           COUNT = 9,
           WORD_MIN_SIZE = 4,
