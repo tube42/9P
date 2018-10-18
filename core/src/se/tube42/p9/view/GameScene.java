@@ -332,7 +332,8 @@ public class GameScene extends Scene
 
     private void go_back()
     {
-        World.mgr.setScene(World.scene_stats);
+		World.mgr.setScene(World.scene_stats);
+		ServiceProvider.saveAll();
     }
 
     private void button_press(int id)
