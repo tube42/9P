@@ -155,6 +155,49 @@ public final class IOService
         }
     }
 
+	// --------------------------------------------------------------
+	public static HashMap<String, String> loadTranslation(String lang)
+	{
+		HashMap<String, String> ret = new HashMap<String, String> ();
+		try {
+			Reader r = Gdx.files.internal("translation.txt").reader();
+			BufferedReader br = new BufferedReader(r);
+			String id = "<?>";
+			for(;;) {
+				String line = br.readLine();
+				if(line == null)
+					break;
+				line = line.trim();
+				if(line.length() == 0 || line.charAt(0) == '#')
+					continue;
+
+				int n = line.indexOf(':');
+				if(n != -1) {
+					String key = line.substring(0, n).trim();
+					String value = line.substring(n + 1).trim();
+					if(key.length() == 0) {
+						id = value;
+					} else if(key.equals(lang)) {
+						value = value.replace("\\n", "\n");
+						value = value.replace("\\t", "\t");
+						String old = ret.get(id);
+						if(old != null) {
+							value = old + value;
+						}
+
+						ret.put(id, value);
+					}
+				}
+			}
+
+			r.close();
+		} catch(Exception e) {
+            System.err.println("ERROR: " + e);
+        }
+		return ret;
+	}
+
+
     // --------------------------------------------------------------
     // helper functions
 
@@ -169,5 +212,6 @@ public final class IOService
 
     	return ret;
     }
+
 
 }

@@ -31,7 +31,7 @@ public class AboutScene extends Scene
 
 
         aboutText = new BaseText(Assets.fonts2[0]);
-        aboutText.setText(ABOUT_TEXT);
+        aboutText.setText(ServiceProvider.translate("<ABOUT TEXT>"));
         aboutText.setPosition(2, 20, 20);
         aboutText.setAlignment(-0.5f,0.5f); // -0.5f, 0.5f);
         aboutText.setColor( COLOR_FG);

@@ -63,8 +63,16 @@ public class LangScene extends Scene
 
 
 	private void set_language(String lang) {
-		GameService.setDict(lang);
+		ServiceProvider.setLanguage(lang);
 
+		World.scene_bg = new BackgroundScene();
+        World.scene_menu = new MenuScene();
+        World.scene_settings = new SettingsScene();
+        World.scene_about = new AboutScene();
+        World.scene_game = new GameScene();
+        World.scene_stats = new StatsScene();
+        World.scene_group = new GroupScene();
+		World.scene_level = new LevelScene();
 		World.mgr.setScene( World.scene_menu);
 
 		// can have this before we set the language

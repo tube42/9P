@@ -44,14 +44,6 @@ public class P9 extends BaseApp
 		World.bgc.set(1, 0);
 		World.bgc.set(2, 0);
 
-		World.scene_bg = new BackgroundScene();
-        World.scene_menu = new MenuScene();
-        World.scene_settings = new SettingsScene();
-        World.scene_about = new AboutScene();
-        World.scene_game = new GameScene();
-        World.scene_stats = new StatsScene();
-        World.scene_group = new GroupScene();
-		World.scene_level = new LevelScene();
 		// World.mgr.setScene( World.scene_menu);  // first screen
 
 		// first screen

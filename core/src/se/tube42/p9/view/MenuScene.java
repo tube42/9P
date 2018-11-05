@@ -29,9 +29,9 @@ public class MenuScene extends Scene
         l0.flags |= Layer.FLAG_TOUCHABLE;
 
         buttons = new ButtonItem[3];
-        buttons[0] = new ButtonItem("about", Assets.tex_icons, ICONS_ABOUT);
-        buttons[1] = new ButtonItem("settings", Assets.tex_icons, ICONS_SETTINGS);
-        buttons[2] = new ButtonItem("play", Assets.tex_icons, ICONS_PLAY);
+        buttons[0] = new ButtonItem(ServiceProvider.translate("about"), Assets.tex_icons, ICONS_ABOUT);
+        buttons[1] = new ButtonItem(ServiceProvider.translate("settings"), Assets.tex_icons, ICONS_SETTINGS);
+        buttons[2] = new ButtonItem(ServiceProvider.translate("play"), Assets.tex_icons, ICONS_PLAY);
 		for(int i = 0; i < buttons.length; i++) {
 			buttons[i].setColor(Constants.COLOR_FG);
 			buttons[i].setTextPosition(ButtonItem.TEXTPOS_BELOW);

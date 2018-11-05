@@ -23,7 +23,9 @@ public final class World extends UIC
     public static int tile2_size;
     public static int tile3_size;
 
-    // game data
+	// game data
+	public static String lang;
+	public static HashMap<String, String>translation;
     public static WordList words;
 
     public static int level_group;

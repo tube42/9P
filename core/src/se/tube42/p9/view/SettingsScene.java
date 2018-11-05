@@ -78,10 +78,10 @@ public class SettingsScene extends Scene
 
     private void update()
     {
-        settings[0].setText( Settings.sound_on ? "sound on" : "sound off");
-		settings[1].setText( funoff ? "fun off" : "boring on");
-		settings[2].setText( delstate == 0 ? "delete progress" :
-			delstate == 1 ? "confirm" : "deleted");
+        settings[0].setText( ServiceProvider.translate(Settings.sound_on ? "sound on" : "sound off"));
+		settings[1].setText( ServiceProvider.translate(funoff ? "fun off" : "boring on"));
+		settings[2].setText( ServiceProvider.translate(delstate == 0 ? "delete progress" :
+			delstate == 1 ? "confirm" : "deleted"));
     }
 
     public void resize(int w, int h)

@@ -12,18 +12,6 @@ import static se.tube42.p9.data.Constants.*;
 
 public final class GameService
 {
-
-    public static void setDict(String dict)
-    {
-        try {
-            World.words = IOService.loadWordList(dict);
-            World.levels = IOService.loadLevels(World.words);
-        } catch(Exception e) {
-            System.err.println(e.toString());
-            Gdx.app.exit();
-        }
-    }
-
     public static void setLevel(Level l)
     {
     	/* same level */

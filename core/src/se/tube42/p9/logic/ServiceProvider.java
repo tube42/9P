@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 
 import se.tube42.lib.ks.*;
 import se.tube42.lib.tweeny.*;
+import se.tube42.p9.data.World;
 import se.tube42.lib.service.*;
 
 public final class ServiceProvider
@@ -37,10 +38,21 @@ public final class ServiceProvider
     	StorageService.flush();
 	}
 
-	public static void deleteSavedLevels() {
+	public static void deleteSavedLevels()
+	{
 		GameService.deleteSavedLevels();
 		StorageService.flush();
 	}
+
+	public static void setLanguage(String lang)
+	{
+		LanguageService.setLanguage(lang);
+	}
+	public static String translate(String expr)
+	{
+		return LanguageService.translate(expr);
+	}
+
 
     // ------------------------------------------------
     // IOService
