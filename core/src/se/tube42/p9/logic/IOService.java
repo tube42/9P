@@ -182,7 +182,11 @@ public final class IOService
 						value = value.replace("\\t", "\t");
 						String old = ret.get(id);
 						if(old != null) {
-							value = old + value;
+							if(old.endsWith("\n")) {
+								value = old + value;
+							} else {
+								value = old + " " + value;
+							}
 						}
 
 						ret.put(id, value);

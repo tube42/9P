@@ -18,8 +18,8 @@ public final class Constants
           WORD_NEW = 3
           ;
 
-    public static final String
-          CHARSET_ALPHA = "abcdefghijklmnopqrstuvwxyzéèáàç",
+	public static final String
+          CHARSET_ALPHA = "abcdefghijklmnopqrstuvwxyzèçàæâêÿûîœôäëüïöù",
           CHARSET_ALNUM = CHARSET_ALPHA + "0123456789",
           CHARSET_FULL = CHARSET_ALNUM + CHARSET_ALNUM.toUpperCase() + "%?!.,()-'";
     ;
