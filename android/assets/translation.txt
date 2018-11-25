@@ -7,19 +7,19 @@
 # ...
 # multiple translaition lines will be added together
 
-:about
+:About
 fr:À propos
 
-:settings
+:Settings
 fr:Paramètres
 
-:play
+:Play
 fr:Jouer
 
 :<ABOUT TEXT>
-en:a word puzzle i made since i love word puzzles...\n\n
-en:the objective is to find the 9-letter word and unlock more levels
-en:once you have unlocked them all, well congrats, you now know many unusual words...
+en:A word puzzle i made since i love word puzzles...\n\n
+en:The objective is to find the 9-letter word and unlock more levels.
+en:Once you have unlocked them all, well congrats, you now know many unusual words...
 fr:Un puzzle de mots que j'ai fait car j'adore les puzzles de mots...\n\n
 fr:L'objectif est de trouver le mot de 9 lettres et de débloquer plus de niveaux.
 fr:Une fois que vous les avez tous déverrouillés, eh bien félicitations, vous connaissez maintenant beaucoup de mots inhabituels...
