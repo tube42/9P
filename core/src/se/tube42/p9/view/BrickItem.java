@@ -28,7 +28,6 @@ public class BrickItem extends SpriteItem
     private boolean sel;
     private GlyphLayout layout = new GlyphLayout();
 
-
     public BrickItem(int pos)
     {
         super(Assets.tex_rect, 0);
@@ -41,30 +40,42 @@ public class BrickItem extends SpriteItem
 
         setColor(Constants.COLOR_1);
         setChar('?');
-        setPosition(pos);
-        select(false);
+		setPosition(pos);
+
+		setRotation(0);
+		text.setFont(font2);
     }
 
-    // ----------------------------------------
+	// ----------------------------------------
+
+	@Override
+	public void setSize(float w, float h) {
+		set(ITEM_V, w).configure(Math.min(SPEED_ADD, SPEED_REMOVE), null);
+		super.setSize(w, h);
+	}
 
     public boolean free() { return !sel; }
 
-    public void select(boolean sel)
+    public void select(boolean sel, int big_size, int small_size)
     {
-        if(this.sel == sel) return;
-        this.sel = sel;
+		if(this.sel == sel)
+			return;
 
-        final float t = RandomService.get(0.2f, 0.4f);
+		// save this and get back to it in a moment
+		this.sel = sel;
+		final float t = RandomService.get(0.2f, 0.4f);
 
-        if(sel) {
-            final float r = RandomService.get(-3, +3);
-            setRotation(t, r);
-            text.setFont(font1);
-        } else {
-            setRotation(t, 0);
-            text.setFont(font2);
-        }
+		if(sel) {
+			final float r = RandomService.get(-3, +3);
+			setRotation(t, r);
+			text.setFont(font1);
+			setSize(small_size, small_size);
 
+		} else {
+			setRotation(t, 0);
+			text.setFont(font2);
+			setSize(big_size, big_size);
+		}
     }
 
     public int getPosition()
@@ -89,8 +100,12 @@ public class BrickItem extends SpriteItem
         text.setText( Character.toString(c) );
     }
 
-    public void draw(SpriteBatch sb)
-    {
+	public void draw(SpriteBatch sb)
+	{
+    	final int size = (int)get(ITEM_V);
+		this.w = size;
+		this.h = size;
+
         super.draw(sb);
         ColorHelper.set(text.getFont(), COLOR_FG, getAlpha());
         text.draw(sb, getX() + w / 2, getY() + h / 2);

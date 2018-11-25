@@ -17,16 +17,16 @@ import static se.tube42.p9.data.WordList.*;
 
 public class GameScene extends Scene
 {
-    private BarLayer l0;
-    private Layer l1, l2, l4;
-    private ParticleLayer l3;
+    private BarLayer lui;
+    private Layer lplaced, ltiles, lstars;
+    private ParticleLayer lparticles;
     private SpriteItem back0;
     private StarItem []stars;
     private IconItem seen;
 
     private int big_size, big_stripe, big_x0, big_y0;
     private int sel_size, sel_stripe, sel_x0, sel_y0;
-
+	private int sel_dx, sel_dy;
 
     private BrickItem brick_sel;
 
@@ -36,95 +36,96 @@ public class GameScene extends Scene
 
         World.board = new Board();
 
-        addLayer( l0 = new BarLayer(true, 3));
-        l0.setPosition(0, 0);
-        l0.setIcon(0, ICONS_BACK, false);
+        addLayer( lui = new BarLayer(true, 3));
+        lui.setPosition(0, 0);
+        lui.setIcon(0, ICONS_BACK, false);
 
-        l0.setPosition(1, 1);
-        l0.setIcon(1, -1, false);
-        l0.getButton(1).button = false;
-        l0.setPosition(2, 2);
-        l0.setIcon(2, ICONS_SHUFFLE, false);
-        seen = l0.getButton(1);
+        lui.setPosition(1, 1);
+        lui.setIcon(1, -1, false);
+        lui.getButton(1).button = false;
+        lui.setPosition(2, 2);
+        lui.setIcon(2, ICONS_SHUFFLE, false);
+        seen = lui.getButton(1);
 
-        l1 = getLayer(1);
-        l1.add( back0 = new SpriteItem(Assets.tex_rect, 0));
+        lplaced = getLayer(1);
+        lplaced.add( back0 = new SpriteItem(Assets.tex_rect, 0));
         back0.setColor(ColorHelper.lighter(COLOR_1));
-        back0.setAlpha(1);
+		back0.setAlpha(1);
 
-        l2 = getLayer(2);
-        l2.add(World.board.all);
-        addLayer(l3 = new ParticleLayer());
+
+		ltiles = getLayer(2);
+        ltiles.add(World.board.all);
+        addLayer(lparticles = new ParticleLayer());
 
         stars = new StarItem[3];
         for(int i = 0; i < stars.length; i++)
             stars[i] = new StarItem();
-        l4 = getLayer(4);
-        l4.add(stars);
+        lstars = getLayer(4);
+        lstars.add(stars);
 
         reset();
+        update();
+    }
+
+
+    public void resize(int w, int h)
+    {
+		super.resize(w, h);
+		lui.position(w, h);
+
+		// compute board placement
+        sel_stripe = Math.min(World.tile3_size, w / 10);
+        sel_size = sel_stripe * 8 / 10;
+        sel_x0 = sel_size / 2;
+        big_stripe = World.tile1_size;
+        big_size = big_stripe * 9 / 10;
+
+        // we divide the unused space into 3 to get the gap between items:
+        final int hgap = (int)(lui.getY() - sel_stripe - 2 * big_stripe - big_size) / 3;
+        big_x0 = (w - 2 * big_stripe - big_size) / 2;
+        big_y0 = hgap;
+        sel_y0 = big_y0 + 3 * big_stripe + hgap;
+
+		// set position the items
+		back0.setSize(w, sel_stripe);
+		back0.setPosition(0, sel_y0 - (sel_stripe - sel_size) / 2);
+
+		// position stars stars
+        final int starsize = lui.getSize();
+        final int star_y0 = lui.getY();
+		final int star_x0 = (w - 3 * starsize) / 2;
+        for(int i = 0; i < stars.length; i++) {
+            final StarItem si = stars[i];
+            si.setSize(starsize, starsize);
+            si.setPosition(star_x0 + i * starsize, star_y0);
+		}
+
+		World.board.configure(big_size, sel_size);
+
         update();
     }
 
     // --------------------------------------------------
     private void position()
     {
-        // calc position of tiles and so on:
-        final int w = World.sw;
-        final int h = World.sh;
-
-        sel_stripe = Math.min(World.tile3_size, w / 10);
-        sel_size = sel_stripe * 8 / 10;
-        sel_x0 = sel_size / 2;
-
-        big_stripe = World.tile1_size;
-        big_size = big_stripe * 9 / 10;
-
-        // we divide the unused space into 3 to get the gap between items:
-        final int hgap = (int)(l0.getY() - sel_stripe - 2 * big_stripe - big_size) / 3;
-
-        big_x0 = (w - 2 * big_stripe - big_size) / 2;
-        big_y0 = hgap;
-        sel_y0 = big_y0 + 3 * big_stripe + hgap;
-
-        final int starsize = l0.getSize();
-        final int star_y0 = l0.getY();
-        final int star_x0 = (w - 3 * starsize) / 2;
-
-
-        // set position the items
-        back0.setSize(w, sel_stripe);
-        back0.setPosition(0, sel_y0 - (sel_stripe - sel_size) / 2);
-
-        // free bricks
+		// place bricks on the board
         for(int i = 0; i < COUNT; i++) {
             final BrickItem bi = World.board.all[i];
             bi.setPosition(i);
             if(bi.free()) {
-                bi.setSize(big_size, big_size);
-                bi.setPosition(0.3f,
-                          bi.x2 = big_x0 + (i % 3) * big_stripe,
-                          bi.y2 = big_y0 + (i / 3) * big_stripe
-                          );
-            }
-        }
+                bi.setPosition(SPEED_REMOVE,
+                          big_x0 + (i % 3) * big_stripe,
+						  big_y0 + (i / 3) * big_stripe);
+			}
+		}
 
-        // in use bricks
-        final int y1 = sel_y0;
+		// place select bricks
+		final int y1 = sel_y0;
         int x1 = (World.sw - (World.board.cnt - 1) * sel_stripe - sel_size) / 2;
-        for(int i = 0; i < World.board.cnt; i++) {
-            final BrickItem bi = World.board.selected[i];
-            bi.setSize(sel_size, sel_size);
-            bi.setPosition(0.6f, bi.x2 = x1, bi.y2 = y1);
-            x1 += sel_stripe;
-        }
-
-
-        // set stars
-        for(int i = 0; i < stars.length; i++) {
-            final StarItem si = stars[i];
-            si.setSize(starsize, starsize);
-            si.setPosition(star_x0 + i * starsize, star_y0);
+		for(int i = 0; i < World.board.cnt; i++) {
+			final BrickItem bi = World.board.selected[i];
+			bi.setPosition(SPEED_ADD, x1, y1);
+			x1 += sel_stripe;
         }
     }
 
@@ -147,26 +148,18 @@ public class GameScene extends Scene
         }
     }
 
-    public void resize(int w, int h)
-    {
-    	super.resize(w, h);
-        l0.position(w, h);
-
-        update();
-    }
-
     public void reset()
     {
         seen.setIcon(-1, false);
-        l0.setIcon(2, World.board.cnt == 0 ? ICONS_SHUFFLE : ICONS_DEL, false);
-        l3.killAllParticles();
+        lui.setIcon(2, World.board.cnt == 0 ? ICONS_SHUFFLE : ICONS_DEL, false);
+        lparticles.killAllParticles();
     }
 
     public void onShow()
     {
     	reset();
         update();
-        l0.animate(true);
+        lui.animate(true);
         animate(true);
 
         World.scene_bg.onHide(); // disable bg for now
@@ -178,7 +171,7 @@ public class GameScene extends Scene
     	GameService.saveChangedLevels();
 
         update();
-        l0.animate(false);
+        lui.animate(false);
         animate(false);
 
         World.scene_bg.onShow(); // bg is back...
@@ -187,7 +180,7 @@ public class GameScene extends Scene
     private void update()
     {
         position();
-        l0.setIcon(2, World.board.cnt == 0 ? ICONS_SHUFFLE : ICONS_DEL, true);
+        lui.setIcon(2, World.board.cnt == 0 ? ICONS_SHUFFLE : ICONS_DEL, true);
     }
 
     // ----------------------------------------------------
@@ -207,7 +200,7 @@ public class GameScene extends Scene
             for(int j = 0; j < 8 && i < num; j++) {
                 final float t = RandomService.get(0.8f, 2.5f);
                 final float d = RandomService.get(0.45f, 0.6f);
-                final Particle p = l3.create(d, t);
+                final Particle p = lparticles.create(d, t);
                 p.configure(Assets.tex_icons, ICONS_STAR1, 0x30000000);
                 p.attach(si);
                 p.setAcceleration(0, - speed * 2, 0);
@@ -230,7 +223,7 @@ public class GameScene extends Scene
                 final float t = RandomService.get(0.4f, 1.5f);
                 final float d = RandomService.get(0.45f, 0.6f);
 
-                final Particle p = l3.create(d, t);
+                final Particle p = lparticles.create(d, t);
                 p.configure(Assets.tex_rect, 0, 0x30000000);
                 p.attach(bi);
 
@@ -253,8 +246,12 @@ public class GameScene extends Scene
             anim_added();
 
             final int new_stars = GameService.calcLevelStars(level);
-            if(old_stars != new_stars)
-                anim_gained_stars(new_stars);
+            if(old_stars != new_stars) {
+				anim_gained_stars(new_stars);
+
+				// also save progress in case player kills app after this
+				ServiceProvider.saveAll();
+			}
         }
     }
 
@@ -263,8 +260,7 @@ public class GameScene extends Scene
     private void char_add_brick(BrickItem bi)
     {
     	if(World.board.add(bi)) {
-            l2.moveLast(bi);
-            register_change();
+			moved(bi, true);;
         }
     }
 
@@ -272,8 +268,7 @@ public class GameScene extends Scene
     {
     	BrickItem added = World.board.add(c);
     	if(added != null) {
-            l2.moveLast(added);
-            register_change();
+			moved(added, true);;
     	}
     }
 
@@ -281,8 +276,7 @@ public class GameScene extends Scene
     private void char_del_this(BrickItem bi)
     {
     	if(World.board.remove(bi)) {
-            l2.moveLast(bi);
-            register_change();
+			moved(bi, false);
         }
     }
 
@@ -290,11 +284,16 @@ public class GameScene extends Scene
     {
     	BrickItem removed = World.board.remove();
     	if(removed != null) {
-            l2.moveLast( removed);
-    	    register_change();
+			moved(removed, false);
     	}
-    }
+	}
 
+	private void moved(BrickItem bi, boolean sel)
+	{
+		ltiles.moveLast(bi);
+		register_change();
+
+	}
 
     private void board_clear()
     {
@@ -380,33 +379,48 @@ public class GameScene extends Scene
 
     public boolean touch(int ptr, int x, int y, boolean down, boolean drag)
     {
-        // handle buttons:
-        final int but = l0.touch(x, y, down, drag);
-        if(but != -1) {
-            button_press(but);
-            return true;
-        }
+		if(ptr != 0)
+			return false;
 
+		// handle buttons:
+		if(brick_sel == null) {
+			final int but = lui.touch(x, y, down, drag);
+			if(but != -1) {
+				button_press(but);
+				return true;
+			}
+		}
 
         // handle bricks
-        BrickItem hit = (BrickItem) l2.hit(x, y);
-        if(down && !drag) {
-            brick_sel = hit;
-            if(brick_sel != null) {
-                brick_sel.setScale(brick_sel.free() ? 0.9f : 1.3f);
-            }
+		if(down) {
+			if(!drag) {
+				BrickItem hit = (BrickItem) ltiles.hit(x, y);
+				brick_sel = hit;
+				if(brick_sel != null) {
+					brick_sel.setScale(brick_sel.free() ? 0.9f : 1.3f);
+					sel_dx = (int)(x - brick_sel.getX());
+					sel_dy = (int)(y - brick_sel.getY());
+				}
 
+			} else {
+				if(brick_sel != null ) {
+					brick_sel.setPosition(x - sel_dx, y - sel_dy);
+				}
+			}
         } else if(!down) {
             if(brick_sel != null) {
-                brick_sel.setScale(1.0f);
-                if(hit == brick_sel) {
+				brick_sel.setScale(1.0f);
                     if(brick_sel.free() )
                         char_add_brick(brick_sel);
                     else
                         char_del_this(brick_sel);
-                }
             }
-        }
+		}
+
+		// always end round with dropping this
+		if(!down) {
+			brick_sel = null;
+		}
 
         return true;
     }

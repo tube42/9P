@@ -24,6 +24,10 @@ public final class Constants
           CHARSET_FULL = CHARSET_ALNUM + CHARSET_ALNUM.toUpperCase() + "%?!.,()-'";
     ;
 
+	public static final float
+		SPEED_ADD = 0.6f,
+		SPEED_REMOVE = 0.3f
+		;
 
     public static final int
           COLOR_BG = 0xf3f5be,
