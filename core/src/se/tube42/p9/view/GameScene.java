@@ -160,7 +160,11 @@ public class GameScene extends Scene
     	reset();
         update();
         lui.animate(true);
-        animate(true);
+		animate(true);
+
+		// if we are doing size animatin, this is not the time to do them:
+		for(BrickItem bi : World.board.all)
+			bi.removeTween(BaseItem.ITEM_V, true);
 
         World.scene_bg.onHide(); // disable bg for now
     }
