@@ -93,4 +93,13 @@ public class LangScene extends Scene
         return true;
     }
 
+	public boolean type(int key, boolean down)
+    {
+        if(down && (key == Keys.BACK || key == Keys.ESCAPE)) {
+            ServiceProvider.exit();
+        }
+
+        return false;
+    }
+
 }

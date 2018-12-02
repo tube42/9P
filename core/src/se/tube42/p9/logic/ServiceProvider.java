@@ -27,6 +27,11 @@ public final class ServiceProvider
         TweenManager.service( dt);
     }
 
+	public static void exit()
+	{
+		finish();
+		Gdx.app.exit();
+	}
     public static void finish()
     {
         StorageService.flush();

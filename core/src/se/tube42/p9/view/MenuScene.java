@@ -111,7 +111,7 @@ public class MenuScene extends Scene
     public boolean type(int key, boolean down)
     {
         if(down && (key == Keys.BACK || key == Keys.ESCAPE)) {
-            Gdx.app.exit();
+        	ServiceProvider.exit();
         }
 
         return false;
