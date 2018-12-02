@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "26.0.2"
-    compileSdkVersion 26
+    buildToolsVersion "28.0.3"
+    compileSdkVersion 28
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -20,7 +20,7 @@ android {
     defaultConfig {
         applicationId "se.tube42.p9.android"
         minSdkVersion 11
-        targetSdkVersion 26
+        targetSdkVersion 28
 
 		// game version (matches git tag)
         versionCode 8
