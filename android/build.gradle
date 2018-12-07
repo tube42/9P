@@ -1,5 +1,5 @@
 android {
-    buildToolsVersion "28.0.3"
+    buildToolsVersion "28.0.2"
     compileSdkVersion 28
     sourceSets {
         main {
@@ -23,8 +23,8 @@ android {
         targetSdkVersion 28
 
 		// game version (matches git tag)
-        versionCode 8
-        versionName "0.0.8"
+        versionCode 9
+        versionName "0.0.9"
     }
     buildTypes {
         release {

@@ -25,7 +25,7 @@ public class ButtonItem extends SpriteItem
 
     private BitmapFont font;
     private String text;
-    private int textpos;
+	private int textpos, textcolor;
     private GlyphLayout layout = new GlyphLayout();
 
 
@@ -42,13 +42,19 @@ public class ButtonItem extends SpriteItem
         this.flags |= BaseItem.FLAG_TOUCHABLE;
         this.textpos = TEXTPOS_CENTER;
         setText(text);
-        setColor(Constants.COLOR_1);
+		setColor(Constants.COLOR_1);
+		setTextColor(COLOR_FG);
     }
 
-    public void setTextPosition(int textpos)
-    {
-	this.textpos = textpos;
-    }
+	public void setTextColor(int c)
+	{
+		this.textcolor = c;
+	}
+
+	public void setTextPosition(int textpos)
+	{
+		this.textpos = textpos;
+	}
 
     public void setText(String text)
     {
@@ -72,7 +78,7 @@ public class ButtonItem extends SpriteItem
         else if(textpos == TEXTPOS_BELOW)
             y -= layout.height / 4;
 
-        ColorHelper.set(font, COLOR_FG, getAlpha() );
+        ColorHelper.set(font, textcolor, getAlpha() );
         font.draw(sb, text, x, y);
 
     }

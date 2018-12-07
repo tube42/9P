@@ -41,7 +41,8 @@ fr:Ennuyeux
 
 :delete progress
 
-fr:Supprimer la progression
+#fr:Supprimer la progression
+fr:Effacer progression
 
 :confirm
 

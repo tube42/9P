@@ -29,9 +29,10 @@ public final class Constants
 		SPEED_REMOVE = 0.3f
 		;
 
-    public static final int
+	public static final int
+		COLOR_BLACK = 0x000000,
           COLOR_BG = 0xf3f5be,
-          COLOR_FG = 0x312f2b,
+		  COLOR_FG = 0x312f2b,
           COLOR_1 = 0xc2be86,
           COLOR_2 = 0x1f8bc2,
           COLOR_3 = 0xe93c40,

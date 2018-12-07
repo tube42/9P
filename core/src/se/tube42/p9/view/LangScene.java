@@ -28,8 +28,10 @@ public class LangScene extends Scene
 
 
 		langs = new ButtonItem[ LANGUAGES.length];
-		for(int i = 0; i < langs.length; i++)
-			langs[i] = new ButtonItem(LANGUAGES[i], Assets.tex_lang, i);
+		for(int i = 0; i < langs.length; i++) {
+			langs[i] = new ButtonItem(LANGUAGES[i].toUpperCase(), Assets.tex_lang, i);
+			langs[i].setTextColor(COLOR_BLACK);
+		}
 
 
 		l0 = getLayer(0);
