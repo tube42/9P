@@ -78,7 +78,7 @@ public class MenuScene extends Scene {
 	public void onShow() {
 		position();
 		animate(true);
-
+		SoundService.playMusic(true);
 	}
 
 	public void onHide() {

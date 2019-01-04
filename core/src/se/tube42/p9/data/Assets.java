@@ -13,5 +13,8 @@ public final class Assets
 
 	public static TextureRegion [] tex_icons, tex_rect;
 	public static TextureRegion [] tex_splash, tex_lang;
+
+	public static Sound [] sound_new;
+	public static Music music;
 }
 

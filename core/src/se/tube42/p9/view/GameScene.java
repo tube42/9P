@@ -85,7 +85,7 @@ public class GameScene extends Scene {
 
 		// position stars stars
 		final int starsize = lui.getSize();
-		final int star_y0 = lui.getY();
+		final int star_y0 = sel_y0 + (sel_size - starsize) / 2;
 		final int star_x0 = (w - 3 * starsize) / 2;
 		for (int i = 0; i < stars.length; i++) {
 			final StarItem si = stars[i];
@@ -299,6 +299,9 @@ public class GameScene extends Scene {
 				text0.set(BaseItem.ITEM_A, 1f, 0).configure(0.3f, null)
 					.pause(0.5f)
 					.tail(1f).configure(0.5f, null);
+
+				SoundService.playNew(World.board.cnt, WORD_MAX_SIZE);
+
 				return WORD_NEW;
 			} else {
 				text0.setText(ServiceProvider.translate("seen"));

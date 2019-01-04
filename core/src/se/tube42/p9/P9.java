@@ -1,6 +1,9 @@
 package se.tube42.p9;
 
+import java.util.*;
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.loaders.SoundLoader;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -98,5 +101,10 @@ public class P9 extends BaseApp
 		tmp = AssetService.load(ascale + "/lang.png", true);
         Assets.tex_lang = AssetService.divide(tmp, 1, 4);
 
-    }
+
+		Assets.sound_new = SoundService.loadSound("new");
+		Assets.music = SoundService.loadMusic("music0");
+	}
+
+
 }
