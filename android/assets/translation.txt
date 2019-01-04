@@ -24,6 +24,10 @@ fr:Un puzzle de mots que j'ai fait car j'adore les puzzles de mots...\n\n
 fr:L'objectif est de trouver le mot de 9 lettres et de débloquer plus de niveaux.
 fr:Une fois que vous les avez tous déverrouillés, eh bien félicitations, vous connaissez maintenant beaucoup de mots inhabituels...
 
+:seen
+en:(seen)
+fr:(dupliquer)
+
 :level
 fr:Niveau
 

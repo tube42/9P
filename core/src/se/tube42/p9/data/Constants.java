@@ -42,7 +42,6 @@ public final class Constants
 
     public static final int
 	ICONS_BACK = 0,
-	ICONS_SEEN = 1,
 	ICONS_SHUFFLE = 2,
 	ICONS_DEL = 3,
 	ICONS_FORWARD = 4,

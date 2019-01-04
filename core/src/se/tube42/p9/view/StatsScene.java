@@ -20,7 +20,7 @@ public class StatsScene extends Scene
     private Layer l1, l2;
     private StatsBarItem []bars;
     private SpriteItem [] stars;
-    private BaseText text0;
+    private BaseText text0, text1;
 
     public StatsScene()
     {
@@ -29,7 +29,11 @@ public class StatsScene extends Scene
 
         text0 = new BaseText(Assets.fonts2[0]);
         text0.setAlignment(-0.5f, 0.5f);
-        text0.setColor(COLOR_FG);
+		text0.setColor(COLOR_FG);
+
+		text1 = new BaseText(Assets.fonts2[0]);
+        text1.setAlignment(-0.5f, 0.5f);
+        text1.setColor(COLOR_FG);
 
         bars = new StatsBarItem[WORD_MAX_SIZE + 1 - WORD_MIN_SIZE];
         for(int i = 0; i < bars.length; i++) {
@@ -44,7 +48,7 @@ public class StatsScene extends Scene
 
         addLayer( l0 = new BarLayer(true, ICONS_BACK, -1, ICONS_FORWARD));
         l1 = getLayer(1);
-        l1.add(text0);
+        l1.add(text0, text1);
         l1.add(bars);
         l1.add(stars);
 
@@ -57,7 +61,8 @@ public class StatsScene extends Scene
         final int h = World.sh;
 
         // text
-        text0.setPosition(w / 2, l0.getY() + l0.getSize() / 2);
+		text0.setPosition(w / 2, l0.getY() + l0.getSize() / 2);
+		text1.setPosition(w / 2, l0.getY() - l0.getSize() / 2);
 
         // bars
         final int cnt = bars.length;
@@ -91,11 +96,13 @@ public class StatsScene extends Scene
                       0.1f, 0.3f, 0.05f, 0.2f, null);
             TweenHelper.animate(stars, BaseItem.ITEM_A, 0, 1,
                       0.1f, 0.3f, 0.2f, 0.3f, null);
-            text0.set(BaseItem.ITEM_A, 0, 1).configure(0.5f, null);
+			text0.set(BaseItem.ITEM_A, 0, 1).configure(0.5f, null);
+			text1.set(BaseItem.ITEM_A, 0, 1).configure(0.5f, null);
         } else {
             TweenHelper.animate(bars, BaseItem.ITEM_A, 1, 0, 0.1f, 0.3f, null);
             TweenHelper.animate(stars, BaseItem.ITEM_A, 1, 0, 0.1f, 0.3f, null);
-            text0.set(BaseItem.ITEM_A, 1, 0).configure(0.5f, null);
+			text0.set(BaseItem.ITEM_A, 1, 0).configure(0.5f, null);
+			text1.set(BaseItem.ITEM_A, 1, 0).configure(0.5f, null);
         }
     }
 
@@ -139,6 +146,7 @@ public class StatsScene extends Scene
 
         text0.setText(
 			ServiceProvider.translate("level") + " " + (l.id + 1));
+		text1.setText( String.valueOf(l.score));
     }
 
     private void select(Level l)
