@@ -25,10 +25,7 @@ public class AboutScene extends Scene
     {
         super("about");
 
-        addLayer( l0 = new BarLayer(true, 1));
-        l0.setPosition(0, 0);
-        l0.setIcon(0, ICONS_BACK);
-
+        addLayer( l0 = new BarLayer(true, ICONS_BACK));
 
         aboutText = new BaseText(Assets.fonts2[0]);
         aboutText.setText(ServiceProvider.translate("<ABOUT TEXT>"));

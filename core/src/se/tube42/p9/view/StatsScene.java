@@ -42,12 +42,7 @@ public class StatsScene extends Scene
             stars[i].setColor(COLOR_FG);
         }
 
-        addLayer( l0 = new BarLayer(true, 2));
-        l0.setIcon(0, ICONS_BACK);
-        l0.setIcon(1, ICONS_FORWARD);
-        l0.setPosition(0, 0);
-        l0.setPosition(1, 2);
-
+        addLayer( l0 = new BarLayer(true, ICONS_BACK, -1, ICONS_FORWARD));
         l1 = getLayer(1);
         l1.add(text0);
         l1.add(bars);

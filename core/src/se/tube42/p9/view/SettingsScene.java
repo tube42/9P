@@ -16,6 +16,8 @@ import se.tube42.p9.logic.*;
 
 import static se.tube42.p9.data.Constants.*;
 
+import java.security.KeyStore.TrustedCertificateEntry;
+
 public class SettingsScene extends Scene
 {
     private BarLayer l0;
@@ -29,10 +31,7 @@ public class SettingsScene extends Scene
     {
         super("settings");
 
-        addLayer( l0 = new BarLayer(true, 1));
-        l0.setPosition(0, 0);
-        l0.setIcon(0, ICONS_BACK);
-
+        addLayer( l0 = new BarLayer(true, ICONS_BACK));
 
         settings = new ButtonItem[3];
         settings[0] = new ButtonItem("");
@@ -87,8 +86,7 @@ public class SettingsScene extends Scene
     public void resize(int w, int h)
     {
         super.resize(w, h);
-
-        l0.position(w, h);
+        l0.resize(w, h);
 
         position();
     }

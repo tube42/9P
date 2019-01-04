@@ -36,16 +36,13 @@ public class GameScene extends Scene
 
         World.board = new Board();
 
-        addLayer( lui = new BarLayer(true, 3));
-        lui.setPosition(0, 0);
-        lui.setIcon(0, ICONS_BACK, false);
+        addLayer( lui = new BarLayer(true, ICONS_BACK, ICONS_SEEN, ICONS_SHUFFLE));
 
-        lui.setPosition(1, 1);
-        lui.setIcon(1, -1, false);
-        lui.getButton(1).button = false;
-        lui.setPosition(2, 2);
-        lui.setIcon(2, ICONS_SHUFFLE, false);
-        seen = lui.getButton(1);
+		seen = lui.get(1);
+		seen.setIcon(-1, false);
+		seen.button = false;
+
+
 
         lplaced = getLayer(1);
         lplaced.add( back0 = new SpriteItem(Assets.tex_rect, 0));
@@ -71,7 +68,7 @@ public class GameScene extends Scene
     public void resize(int w, int h)
     {
 		super.resize(w, h);
-		lui.position(w, h);
+		lui.resize(w, h);
 
 		// compute board placement
         sel_stripe = Math.min(World.tile3_size, w / 10);
