@@ -148,7 +148,7 @@ public class GameScene extends Scene {
 		lui.animate(true);
 		animate(true);
 
-		// if we are doing size animatin, this is not the time to do them:
+		// if we are doing size animation, this is not the time to do them:
 		for (BrickItem bi : World.board.all)
 			bi.removeTween(BaseItem.ITEM_V, true);
 
@@ -222,8 +222,6 @@ public class GameScene extends Scene {
 	}
 
 	private void register_change() {
-		update();
-
 		final Level level = World.level_curr;
 		final int old_stars = GameService.calcLevelStars(level);
 
@@ -238,6 +236,8 @@ public class GameScene extends Scene {
 				ServiceProvider.saveAll();
 			}
 		}
+
+		update();
 	}
 
 	// ADD
@@ -296,10 +296,8 @@ public class GameScene extends Scene {
 			final String str = new String(World.board.letters, 0, World.board.cnt);
 			boolean added = World.level_curr.add(str);
 			if (added) {
-				text0.set(BaseItem.ITEM_A, 1f, 0).configure(0.3f, null)
-					.pause(0.5f)
-					.tail(1f).configure(0.5f, null);
-
+				text0.pause(BaseItem.ITEM_A, 0, 0.3f).tail(1).configure(0.4f, TweenEquation.QUAD_IN);
+				//text0.set(BaseItem.ITEM_A, 0f, 1f).configure(0.4f, TweenEquation.LINEAR);
 				SoundService.playNew(World.board.cnt, WORD_MAX_SIZE);
 
 				return WORD_NEW;
