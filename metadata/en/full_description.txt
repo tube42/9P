@@ -1,0 +1,7 @@
+
+
+9P is a 3x3 word puzzle.
+
+The objective is to find the 9-letter word and unlock more levels.
+
+Once you have unlocked them all, well congrats, you now know many unusual words...
