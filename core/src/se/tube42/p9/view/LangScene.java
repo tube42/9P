@@ -17,91 +17,80 @@ import se.tube42.p9.logic.*;
 
 import static se.tube42.p9.data.Constants.*;
 
-public class LangScene extends Scene
-{
-    private Layer l0;
-	private ButtonItem []langs;
+public class LangScene extends Scene {
+	private Layer l0;
+	private ButtonItem[] langs;
 
-    public LangScene()
-    {
+	public LangScene() {
 		super("language");
 
-
-		langs = new ButtonItem[ LANGUAGES.length];
-		for(int i = 0; i < langs.length; i++) {
-			langs[i] = new ButtonItem(LANGUAGES[i].toUpperCase(), Assets.tex_lang, i);
+		langs = new ButtonItem[LANGUAGES.length];
+		for (int i = 0; i < langs.length; i++) {
+			langs[i] = new ButtonItem(LANGUAGES[i].toUpperCase(), Assets.fonts_init[0], Assets.tex_lang, i);
 			langs[i].setTextColor(COLOR_BLACK);
 		}
 
-
 		l0 = getLayer(0);
-        l0.add(langs);
-    }
+		l0.add(langs);
+	}
 
 	// --------------------------------------------------
 
-
-    public void onShow()
-    {
+	public void onShow() {
 		// how big should it be?
 		int n = 32;
-		while( 6 * n < UIC.sw && langs.length * n * 3 < UIC.sh)
+		while (6 * n < UIC.sw && langs.length * n * 3 < UIC.sh)
 			n++;
 
 		final int h = n, w = n * 2;
 
-		final float gap = (UIC.sh - h * langs.length) /  ( 1 + langs.length);
+		final float gap = (UIC.sh - h * langs.length) / (1 + langs.length);
 		final float x0 = (UIC.sw - w) / 2;
 
-		for(int i = 0; i < langs.length; i++) {
-			final float y0 = gap + i * (gap + h);
+		for (int i = 0; i < langs.length; i++) {
+			final float y0 = UIC.sh - (1 + i) * (gap + h);
 			langs[i].setSize(w, h);
 			langs[i].setPosition(-w, y0);
-			langs[i].set(BaseItem.ITEM_X, x0)
-				.configure(0.1f + i * 0.1f, TweenEquation.BACK_OUT);
+			langs[i].set(BaseItem.ITEM_X, x0).configure(0.1f + i * 0.1f, TweenEquation.BACK_OUT);
 
 		}
 	}
 
-
-	private void set_language(String lang) {
-		ServiceProvider.setLanguage(lang);
+	private void set_language(int index) {
+		ServiceProvider.setLanguage(index);
 
 		World.scene_bg = new BackgroundScene();
-        World.scene_menu = new MenuScene();
-        World.scene_settings = new SettingsScene();
-        World.scene_about = new AboutScene();
-        World.scene_game = new GameScene();
-        World.scene_stats = new StatsScene();
-        World.scene_group = new GroupScene();
+		World.scene_menu = new MenuScene();
+		World.scene_settings = new SettingsScene();
+		World.scene_about = new AboutScene();
+		World.scene_game = new GameScene();
+		World.scene_stats = new StatsScene();
+		World.scene_group = new GroupScene();
 		World.scene_level = new LevelScene();
-		World.mgr.setScene( World.scene_menu);
+		World.mgr.setScene(World.scene_menu);
 
 		// can have this before we set the language
-		World.mgr.setBackground( World.scene_bg);
-
-		// System.out.println("LANG IS" + lang);
+		World.mgr.setBackground(World.scene_bg);
 	}
-    public boolean touch(int ptr, int x, int y, boolean down, boolean drag)
-    {
 
-        if(down && !drag) {
-            ButtonItem hit = (ButtonItem) l0.hit(x, y);
-            if(hit != null) {
+	public boolean touch(int ptr, int x, int y, boolean down, boolean drag) {
+
+		if (down && !drag) {
+			ButtonItem hit = (ButtonItem) l0.hit(x, y);
+			if (hit != null) {
 				hit.press();
-				set_language(LANGUAGES[ hit.getIndex()] );
-            }
-        }
-        return true;
-    }
+				set_language(hit.getIndex());
+			}
+		}
+		return true;
+	}
 
-	public boolean type(int key, boolean down)
-    {
-        if(down && (key == Keys.BACK || key == Keys.ESCAPE)) {
-            ServiceProvider.exit();
-        }
+	public boolean type(int key, boolean down) {
+		if (down && (key == Keys.BACK || key == Keys.ESCAPE)) {
+			ServiceProvider.exit();
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 }

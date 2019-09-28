@@ -128,8 +128,11 @@ public class Board
 
     public void setLevel(Level l)
     {
-        for(int i = 0; i < COUNT; i++)
-            all[i].setChar( l.board.charAt(i));
+        for(int i = 0; i < COUNT; i++) {
+			char ascii = l.board.charAt(i);
+			char unicode = World.words.convert(ascii, true);
+            all[i].setChar(ascii, unicode);
+		}
 
         clear();
     }

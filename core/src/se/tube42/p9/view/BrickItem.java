@@ -39,7 +39,7 @@ public class BrickItem extends SpriteItem
         this.text.setAlignment(-0.5f, + 0.5f);
 
         setColor(Constants.COLOR_1);
-        setChar('?');
+        setChar('?', '?');
 		setPosition(pos);
 
 		setRotation(0);
@@ -94,10 +94,10 @@ public class BrickItem extends SpriteItem
     }
 
 
-    public void setChar(char c)
+    public void setChar(char ascii, char unicode)
     {
-        this.c = c;
-        text.setText( Character.toString(c) );
+        this.c = ascii;
+        text.setText( Character.toString(unicode) );
     }
 
 	public void draw(SpriteBatch sb)

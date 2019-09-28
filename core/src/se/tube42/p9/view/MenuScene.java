@@ -19,6 +19,7 @@ import static se.tube42.p9.data.Constants.*;
 public class MenuScene extends Scene {
 	private Layer l0;
 	private ButtonItem[] buttons;
+	private SpriteItem flag;
 
 	public MenuScene() {
 		super("menu");
@@ -26,15 +27,19 @@ public class MenuScene extends Scene {
 		l0 = getLayer(0);
 		l0.flags |= Layer.FLAG_TOUCHABLE;
 
+		final BitmapFont font = Assets.fonts2[0];
+		final TextureRegion[] tex = Assets.tex_icons;
 		buttons = new ButtonItem[3];
-		buttons[0] = new ButtonItem(ServiceProvider.translate("About"), Assets.tex_icons, ICONS_ABOUT);
-		buttons[1] = new ButtonItem(ServiceProvider.translate("Settings"), Assets.tex_icons, ICONS_SETTINGS);
-		buttons[2] = new ButtonItem(ServiceProvider.translate("Play"), Assets.tex_icons, ICONS_PLAY);
+		buttons[0] = new ButtonItem(ServiceProvider.translate("About"), font, tex, ICONS_ABOUT);
+		buttons[1] = new ButtonItem(ServiceProvider.translate("Settings"), font, tex, ICONS_SETTINGS);
+		buttons[2] = new ButtonItem(ServiceProvider.translate("Play"), font, tex, ICONS_PLAY);
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i].setColor(Constants.COLOR_FG);
 			buttons[i].setTextPosition(ButtonItem.TEXTPOS_BELOW);
 		}
 		l0.add(buttons);
+
+		getLayer(1).add( flag = new SpriteItem(Assets.tex_lang, World.lang_index));
 	}
 
 	// --------------------------------------------------
@@ -58,6 +63,10 @@ public class MenuScene extends Scene {
 		final ButtonItem s = buttons[1];
 		s.setSize(s0, s0);
 		s.setPosition(s.x2 = x0 + s0 * 4, s.y2 = y0 + s0 * 1);
+
+		// flag
+		final int flaggap = (int)(flag.getH() / 2);
+		flag.setPosition(flaggap, flaggap);
 	}
 
 	private void animate(boolean in_) {
@@ -68,6 +77,8 @@ public class MenuScene extends Scene {
 			bi.set(BaseItem.ITEM_A, in_, 0, 1, t, null);
 			bi.set(BaseItem.ITEM_Y, in_, bi.y2 - World.sh, bi.y2, t, TweenEquation.QUAD_OUT);
 		}
+
+		flag.set(BaseItem.ITEM_A, in_, 0, 1, 0.8f, null);
 	}
 
 	public void resize(int w, int h) {

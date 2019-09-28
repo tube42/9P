@@ -2,11 +2,19 @@
 
 TODO
 
+ * Add German:
+   - DONE create new levels
+   - DONE for the current language, get add wordlist charset to the font charset
+   - DONE add code to use unicode for showing
+   - DONE add code to translate unicode to code for lookup
+   - DONE add DE+SV dictionary & artwork
+   - add DE+SV translation
+
  * move Board to data and its logic to logic
  * animate the selected tile in ListBaseScene (old code would scale it out slowly while other tiles dissapear)
 
  * find better levels, right now they are mostly "ssttare..."
-       
+
  * fix brick animation so it doesnt suddently change size from big to small and vice versa
  * when a new word is found play some sound
  * when user unlocks one star do some animation/sound
@@ -20,5 +28,5 @@ DONE
  * when an old word is revisited, show it somehow
  * added level groups
 
- * figure out why the middle bar icon is not shown/animated 
+ * figure out why the middle bar icon is not shown/animated
  * modify Board so World.board.update() is not needed

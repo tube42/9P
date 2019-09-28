@@ -111,7 +111,7 @@ public class SettingsScene extends Scene
     {
         if(bi == settings[0]) {
             Settings.sound_on = !Settings.sound_on;
-            IOService.saveSettings();
+            ServiceProvider.saveSettings();
             update();
         } else if(bi == settings[1]) {
             funoff = !funoff;

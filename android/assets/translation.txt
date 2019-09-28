@@ -9,12 +9,16 @@
 
 :About
 fr:À propos
+sv:Om
 
 :Settings
 fr:Paramètres
+sv:Inställningar
 
 :Play
 fr:Jouer
+sv:Spela!
+de:Start
 
 :<ABOUT TEXT>
 en:A word puzzle i made since i love word puzzles...\n\n
@@ -24,34 +28,57 @@ fr:Un puzzle de mots que j'ai fait car j'adore les puzzles de mots...\n\n
 fr:L'objectif est de trouver le mot de 9 lettres et de débloquer plus de niveaux.
 fr:Une fois que vous les avez tous déverrouillés, eh bien félicitations, vous connaissez maintenant beaucoup de mots inhabituels...
 
+sv:Ett litet spel som jag skrev eftersom jag älskar ordpussel... \n\n
+sv:Målet med spelet är att hitta ord med upp till 9 bokstäver.
+sv:Långa ord låser upp nya nivåer.\n\n
+sv:Och när du låst upp dem alla, man får väl gratulera, nu kan du många ovanliga ord ...
+
+de:Ein Worträtsel :)
+
 :seen
 en:(seen)
 fr:(dupliquer)
+sv:(sett förut)
+de:duplikat
 
 :level
 fr:Niveau
+sv:Nivå
+de:Niveau
 
 :sound on
 fr:Son allumé
+sv:Ljud på
+de:Ton an
 
 :sound off
 fr:Son éteint
+sv:Ljud av
+de:Ton aus
 
 :fun off
 fr:Amusant
+sv:Volvo
+de:Berlin
 
 :boring on
 fr:Ennuyeux
+sv:SAAB
+de:München
 
 :delete progress
 
 #fr:Supprimer la progression
 fr:Effacer progression
+sv:Nollställ
+de:Zurücksetzen
 
 :confirm
-
 fr:Confirmer
+sv:Bekräfta
+de:Bestätigen
+
 :deleted
 fr:Progression supprimée
-
-fr:
+sv:Borta :(
+de:Gelöscht :(

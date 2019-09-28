@@ -16,70 +16,59 @@ import se.tube42.p9.logic.*;
 
 import static se.tube42.p9.data.Constants.*;
 
-public class ButtonItem extends SpriteItem
-{
-    public static final int
-	TEXTPOS_CENTER = 0,
-	TEXTPOS_BELOW = 1
-	;
+public class ButtonItem extends SpriteItem {
+	public static final int TEXTPOS_CENTER = 0, TEXTPOS_BELOW = 1;
 
-    private BitmapFont font;
-    private String text;
+	private BitmapFont font;
+	private String text;
 	private int textpos, textcolor;
-    private GlyphLayout layout = new GlyphLayout();
+	private GlyphLayout layout = new GlyphLayout();
 
+	public ButtonItem(String text) {
+		this(text, Assets.fonts2[0], Assets.tex_rect, 0);
+	}
 
-    public ButtonItem(String text)
-    {
-	this(text, Assets.tex_rect, 0);
-    }
+	public ButtonItem(String text, BitmapFont font, TextureRegion[] tex, int index) {
+		super(tex, index);
 
-    public ButtonItem(String text, TextureRegion [] tex, int index)
-    {
-        super(tex, index);
-
-        this.font = Assets.fonts2[0];
-        this.flags |= BaseItem.FLAG_TOUCHABLE;
-        this.textpos = TEXTPOS_CENTER;
-        setText(text);
+		this.font = font;
+		this.flags |= BaseItem.FLAG_TOUCHABLE;
+		this.textpos = TEXTPOS_CENTER;
+		setText(text);
 		setColor(Constants.COLOR_1);
 		setTextColor(COLOR_FG);
-    }
+	}
 
-	public void setTextColor(int c)
-	{
+	public void setTextColor(int c) {
 		this.textcolor = c;
 	}
 
-	public void setTextPosition(int textpos)
-	{
+	public void setTextPosition(int textpos) {
 		this.textpos = textpos;
 	}
 
-    public void setText(String text)
-    {
-        this.text = text;
-    }
-    public void press()
-    {
-        set(BaseItem.ITEM_S, 1.1f).configure(0.1f, null)
-              .tail(1).configure(0.1f, null);
-    }
-    public void draw(SpriteBatch sb)
-    {
-        super.draw(sb);
+	public void setText(String text) {
+		this.text = text;
+	}
 
-        layout.setText(font, text);
-        final int x = (int)(getX() + (w - layout.width) / 2);
-        int y = (int) getY();
+	public void press() {
+		set(BaseItem.ITEM_S, 1.1f).configure(0.1f, null).tail(1).configure(0.1f, null);
+	}
 
-        if(textpos == TEXTPOS_CENTER)
-            y += (h + layout.height) / 2;
-        else if(textpos == TEXTPOS_BELOW)
-            y -= layout.height / 4;
+	public void draw(SpriteBatch sb) {
+		super.draw(sb);
 
-        ColorHelper.set(font, textcolor, getAlpha() );
-        font.draw(sb, text, x, y);
+		layout.setText(font, text);
+		final int x = (int) (getX() + (w - layout.width) / 2);
+		int y = (int) getY();
 
-    }
+		if (textpos == TEXTPOS_CENTER)
+			y += (h + layout.height) / 2;
+		else if (textpos == TEXTPOS_BELOW)
+			y -= layout.height / 4;
+
+		ColorHelper.set(font, textcolor, getAlpha());
+		font.draw(sb, text, x, y);
+
+	}
 }

@@ -97,7 +97,8 @@ public class BackgroundScene extends Scene implements TweenListener
 
         final int i = msg;
 
-        words[i].setText(World.words.random());
+		String word = World.words.convert(World.words.random(), true);
+        words[i].setText(word);
         words[i].set(BaseItem.ITEM_X, x0, x1).configure(t0, null)
             .pause(t1)
             .tail(x2);
