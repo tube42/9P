@@ -10,15 +10,17 @@
 :About
 fr:À propos
 sv:Om
+de:Impressum
 
 :Settings
 fr:Paramètres
 sv:Inställningar
+de:Einstellungen
 
 :Play
 fr:Jouer
 sv:Spela!
-de:Start
+de:Spielen!
 
 :<ABOUT TEXT>
 en:A word puzzle i made since i love word puzzles...\n\n
@@ -33,13 +35,16 @@ sv:Målet med spelet är att hitta ord med upp till 9 bokstäver.
 sv:Långa ord låser upp nya nivåer.\n\n
 sv:Och när du låst upp dem alla, man får väl gratulera, nu kan du många ovanliga ord ...
 
-de:Ein Worträtsel :)
+de:Ein Kleines Spiel, das ich geschrieben habe weil ich Worträtsel Liebe...\n\n
+de:Ziel des Spiels ist es Wörter mit bis zu 9 Buchstaben zu finden.
+de:Worte Schalten den Zugang zu höheren Niveaus frei.\n\n
+de:Wenn du alle Niveaus geschafft hast: Gratuliere! Jetzt kannst du viele ungewöhnliche Worte.
 
 :seen
 en:(seen)
 fr:(dupliquer)
 sv:(sett förut)
-de:duplikat
+de:Duplikat
 
 :level
 fr:Niveau
@@ -59,19 +64,19 @@ de:Ton aus
 :fun off
 fr:Amusant
 sv:Volvo
-de:Berlin
+de:Mercedes
 
 :boring on
 fr:Ennuyeux
 sv:SAAB
-de:München
+de:VW
 
 :delete progress
 
 #fr:Supprimer la progression
 fr:Effacer progression
 sv:Nollställ
-de:Zurücksetzen
+de:Rücksetzen
 
 :confirm
 fr:Confirmer
@@ -81,4 +86,4 @@ de:Bestätigen
 :deleted
 fr:Progression supprimée
 sv:Borta :(
-de:Gelöscht :(
+de:Wech :(

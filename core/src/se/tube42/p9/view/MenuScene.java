@@ -65,8 +65,7 @@ public class MenuScene extends Scene {
 		s.setPosition(s.x2 = x0 + s0 * 4, s.y2 = y0 + s0 * 1);
 
 		// flag
-		final int flaggap = (int)(flag.getH() / 2);
-		flag.setPosition(flaggap, flaggap);
+		flag.setPosition(World.sw - flag.getW() * 1.5f, flag.getH() / 2f);
 	}
 
 	private void animate(boolean in_) {
