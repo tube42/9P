@@ -22,9 +22,9 @@ android {
         minSdkVersion 11
         targetSdkVersion 28
 
-		// game version (matches git tag)
-        versionCode 10
-        versionName "0.1.0"
+	// game version (matches git tag)
+        versionCode 11
+        versionName "0.1.1"
     }
     buildTypes {
         release {
