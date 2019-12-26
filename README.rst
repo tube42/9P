@@ -45,7 +45,7 @@ To build the assets, you should do
 Valid words
 ----------
 
-The word-list this game uses is `open source <https://gitlab.com/tube42/wordlists>`_.
+The word-list this game uses is `open source <https://github.com/tube42/wordlists>`_.
 File an issue with them if you want to remove or add some words or improve something else.
 
 If you instead have an issue with how 9P works with words, open an issue in the 9P repository.
