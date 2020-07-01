@@ -34,7 +34,7 @@ public class ButtonItem extends SpriteItem {
 		this.font = font;
 		this.flags |= BaseItem.FLAG_TOUCHABLE;
 		this.textpos = TEXTPOS_CENTER;
-		setText(text);
+		this.text = text;
 		setColor(Constants.COLOR_1);
 		setTextColor(COLOR_FG);
 	}
